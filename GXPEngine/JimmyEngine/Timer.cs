@@ -13,6 +13,7 @@ class Timer
 
     public Timer(int Pcooldown, bool startCompleted = false)
     {
+        reset();
         cooldown = Pcooldown;
         if (startCompleted)
         {
@@ -29,7 +30,6 @@ class Timer
     {
         if(Time.time > passedTime + cooldown)
         {
-            reset();
             return true;
         }
         return false;
@@ -38,5 +38,10 @@ class Timer
     public void reset()
     {
         passedTime = Time.time;
+    }
+
+    public int timeLeft()
+    {
+        return Time.time - (passedTime + cooldown);
     }
 }

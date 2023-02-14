@@ -15,4 +15,10 @@ public class DesignerChanges
     public int jump_height = 70;
     public int max_gravity = 100;
     public int gravity = 5;
+
+    public int attackTime = 200;
+    public int attackCooldown = 1000;
+
+    public Character playerOne;
+    public Character playerTwo;
 }

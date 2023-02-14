@@ -24,9 +24,13 @@ public class Character : Sprite
     protected int gravity;
 
     bool grounded = true;
+    public bool attacking = false;
+
+    Timer attackCooldown;
 
     public Character(DesignerChanges design) : base("triangle.png")
     {
+        Console.WriteLine(collider);
         max_move_speed = design.max_move_speed;
         move_speed_up = design.move_speed_up;
         move_slow_down = design.move_slow_down;
@@ -35,12 +39,20 @@ public class Character : Sprite
         max_gravity = design.max_gravity;
         gravity = design.gravity;
 
-        y = 1000;
+        attackCooldown = new Timer(design.attackCooldown, true);
+
+        y = 500;
     }
 
     void Update()
     {
-        Movement(InputHandeling());
+        if (attacking)
+            return;
+        Vector2 inputVector = MoveInputHandeling();
+
+        Movement(inputVector);
+
+        Attack(inputVector);
 
         if (!grounded)
         {
@@ -50,7 +62,35 @@ public class Character : Sprite
         x += moveVector.x;
     }
 
-    Vector2 InputHandeling()
+    void Attack(Vector2 inputVector)
+    {
+        if (attackCooldown.cooldownDone())
+        {
+            if (player_id == 0)
+            {
+                if (Input.GetKey(Key.C))
+                {
+                    Attack attack = new Attack((int)(inputVector.x), this);
+                    AddChild(attack);
+                    attacking = true;
+                    attackCooldown.reset();
+                }
+            }
+
+            else if (player_id == 1)
+            {
+                if (Input.GetKey(Key.COMMA))
+                {
+                    Attack attack = new Attack((int)(inputVector.x), this);
+                    AddChild(attack);
+                    attacking = true;
+                    attackCooldown.reset();
+                }
+            }
+        }
+    }
+
+    Vector2 MoveInputHandeling()
     {
         Vector2 inputVector = new Vector2();
         if (player_id == 0)
@@ -78,7 +118,7 @@ public class Character : Sprite
             }
         }
 
-        if (player_id == 1)
+        else if (player_id == 1)
         {
             if (Input.GetKey(Key.LEFT) && inputVector.x > -1)
             {
@@ -98,7 +138,6 @@ public class Character : Sprite
                 inputVector.y = -1;
             }
         }
-        Console.WriteLine(inputVector);
         return inputVector;
     }
 
@@ -146,9 +185,9 @@ public class Character : Sprite
 
         y += moveVector.y;
 
-        if (y > 1000)
+        if (y > 500)
         {
-            y = 1000;
+            y = 500;
             moveVector.y = 0;
             grounded = true;
         }

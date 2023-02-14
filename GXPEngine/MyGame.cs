@@ -11,7 +11,7 @@ public class MyGame : Game {
     public int currentLevel;
     DesignerChanges designerChanges = new DesignerChanges();
 
-    public MyGame() : base(1920, 1280, false, true, 600, 400)     // Create a window that's 800x600 and NOT fullscreen
+    public MyGame() : base(1366, 768, false, true, 600, 400)     // Create a window that's 800x600 and NOT fullscreen
 	{
         Character cha = new Character(designerChanges);
         cha.player_id = 0;
