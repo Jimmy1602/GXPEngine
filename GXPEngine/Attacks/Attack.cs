@@ -43,7 +43,9 @@ class Attack : Sprite
 
     void HitPlayer(Character target)
     {
-        
+        target.getHit(new Vector2(xOffSet/30, -xOffSet/30));
+        caster.attacking = false;
+        LateDestroy();
     }
 }
 

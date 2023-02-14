@@ -15,6 +15,7 @@ public class Character : Sprite
     public Character other;
 
     protected Vector2 moveVector = new Vector2();
+    protected Vector2 directionVector = new Vector2();
 
     protected int max_move_speed;
     protected int move_speed_up;
@@ -56,92 +57,57 @@ public class Character : Sprite
 
         Movement(inputVector);
 
-        Attack(inputVector);
+        Attack(directionVector);
 
         if (!grounded)
         {
             Fall();
         }
 
+
         x += moveVector.x;
+        if(inputVector.x != 0)
+        {
+            directionVector.x = inputVector.x;
+        }
     }
 
     void Attack(Vector2 inputVector)
     {
-        if (attackCooldown.cooldownDone())
+        if (Input.GetKeyDown(player_id == 0 ? Key.C : Key.COMMA) && attackCooldown.cooldownDone())
         {
-            if (player_id == 0)
-            {
-                if (Input.GetKey(Key.C))
-                {
-                    Attack attack = new Attack((int)(inputVector.x), this);
-                    AddChild(attack);
-                    attacking = true;
-                    attackCooldown.reset();
-                }
-            }
-
-            else if (player_id == 1)
-            {
-                if (Input.GetKey(Key.COMMA))
-                {
-                    Attack attack = new Attack((int)(inputVector.x), this);
-                    AddChild(attack);
-                    attacking = true;
-                    attackCooldown.reset();
-                }
-            }
+            Attack attack = new Attack((int)(inputVector.x), this);
+            AddChild(attack);
+            attacking = true;
+            attackCooldown.reset();
         }
     }
 
     Vector2 MoveInputHandeling()
     {
         Vector2 inputVector = new Vector2();
-        if (player_id == 0)
+        if (Input.GetKey(player_id == 0 ? Key.A : Key.LEFT) && inputVector.x > -1)
         {
-            if (Input.GetKey(Key.A) && inputVector.x > -1)
-            {
-                inputVector.x -= 1;
-            }
-            else if (Input.GetKey(Key.D) && inputVector.x < 1)
-            {
-                inputVector.x += 1;
-            }
-            else
-            {
-                inputVector.x = 0;
-            }
-
-            if (Input.GetKey(Key.W))
-            {
-                inputVector.y = -1;
-            }
-            else
-            {
-                inputVector.y = 0;
-            }
+            inputVector.x -= 1;
+        }
+        else if (Input.GetKey(player_id == 0 ? Key.D : Key.RIGHT) && inputVector.x < 1)
+        {
+            inputVector.x += 1;
+        }
+        else
+        {
+            inputVector.x = 0;
         }
 
-        else if (player_id == 1)
+        if (Input.GetKeyDown(player_id == 0 ? Key.W : Key.RIGHT_SHIFT))
         {
-            if (Input.GetKey(Key.LEFT) && inputVector.x > -1)
-            {
-                inputVector.x -= 1;
-            }
-            else if (Input.GetKey(Key.RIGHT) && inputVector.x < 1)
-            {
-                inputVector.x += 1;
-            }
-            else
-            {
-                inputVector.x = 0;
-            }
-
-            if (Input.GetKey(Key.RIGHT_SHIFT))
-            {
-                inputVector.y = -1;
-            }
+            inputVector.y = -1;
         }
+        else
+        {
+            inputVector.y = 0;
+        }
+
         return inputVector;
     }
 
@@ -202,6 +168,14 @@ public class Character : Sprite
             moveVector.y = 0;
             grounded = true;
         }
+    }
+
+    public void getHit(Vector2 direction)
+    {
+        damage += 5;
+        grounded = false;
+        moveVector = direction.multiplyVector(direction, damage);
+        Console.WriteLine(moveVector);
     }
 }
 
