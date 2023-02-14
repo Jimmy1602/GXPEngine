@@ -34,6 +34,15 @@ class Attack : Sprite
             caster.attacking = false;
             LateDestroy();
         }
+
+        if (HitTest(caster.other))
+        {
+            HitPlayer(caster.other);
+        }
+    }
+
+    void HitPlayer(Character target)
+    {
         
     }
 }

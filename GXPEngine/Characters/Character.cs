@@ -12,6 +12,8 @@ public class Character : Sprite
 {
     public int player_id = 0;
 
+    public Character other;
+
     protected Vector2 moveVector = new Vector2();
 
     protected int max_move_speed;
@@ -25,6 +27,8 @@ public class Character : Sprite
 
     bool grounded = true;
     public bool attacking = false;
+
+    int damage;
 
     Timer attackCooldown;
 
@@ -157,18 +161,25 @@ public class Character : Sprite
             grounded = false;
         }
 
-        SlowDown(inputVector);
+        if (grounded)
+        {
+            SlowDown(inputVector, ground_slow_down);
+        }
+        else
+        {
+            SlowDown(inputVector, move_slow_down);
+        }
     }
 
-    private void SlowDown(Vector2 inputVector)
+    private void SlowDown(Vector2 inputVector, int slow_down)
     {
-        if(moveVector.x > move_speed_up)
+        if(moveVector.x > slow_down && inputVector.x < 1)
         {
-            moveVector.x -= move_slow_down;
+            moveVector.x -= slow_down;
         }
-        else if(moveVector.x < -move_speed_up)
+        else if(moveVector.x < -slow_down && inputVector.x > -1)
         {
-            moveVector.x += move_slow_down;
+            moveVector.x += slow_down;
         }
         else if(inputVector.x == 0)
         {

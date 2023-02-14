@@ -9,7 +9,7 @@ public class DesignerChanges
 {
     public int max_move_speed = 30;
     public int move_speed_up = 4;
-    public int move_slow_down = 2;
+    public int move_slow_down = 1;
     public int ground_slow_down = 5;
 
     public int jump_height = 70;
@@ -18,7 +18,4 @@ public class DesignerChanges
 
     public int attackTime = 200;
     public int attackCooldown = 1000;
-
-    public Character playerOne;
-    public Character playerTwo;
 }

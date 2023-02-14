@@ -16,10 +16,12 @@ public class MyGame : Game {
         Character cha = new Character(designerChanges);
         cha.player_id = 0;
         AddChild(cha);
-        Character che = new Character(designerChanges);
 
+        Character che = new Character(designerChanges);
         che.player_id = 1;
         AddChild(che);
+        che.other = cha;
+        cha.other = che;
 	}
 
     // For every game object, Update is called every frame, by the engine:
