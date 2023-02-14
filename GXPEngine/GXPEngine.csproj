@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Characters\States\Grounded.cs" />
     <Compile Include="DesignerChanges.cs" />
     <Compile Include="JimmyEngine\Bar.cs" />
     <Compile Include="JimmyEngine\Button.cs" />
