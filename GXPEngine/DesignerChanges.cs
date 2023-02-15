@@ -11,7 +11,7 @@ public static class DesignerChanges
     public static int max_move_speed = 15;
     public static int move_speed_up = 1;
     public static int move_slow_down = 2;
-    public static int ground_slow_down = 10;
+    public static int ground_slow_down = 2;
 
     public static int jump_height = 25;
     public static int max_gravity = 40;
@@ -28,4 +28,5 @@ public static class DesignerChanges
     public static int boomerangDamage = 2;
     public static int boomerangKnockbackX = 3;
     public static int boomerangKnockbackY = 3;
+
 }

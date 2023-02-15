@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing.Text;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +27,9 @@ public class Character : AnimationSprite
     protected int max_gravity;
     protected int gravity;
 
+    protected string singleAttackType;
+    protected string specialAttackType;
+
     bool grounded = true;
     public bool attacking = false;
     public bool canAttack = true;
@@ -46,7 +50,8 @@ public class Character : AnimationSprite
 
         attackCooldown = new Timer(DesignerChanges.attackCooldown, true);
 
-
+        singleAttackType = "normal";
+        specialAttackType = "boomerang";
    
         y = 600;
         width = width * 3;
@@ -87,23 +92,37 @@ public class Character : AnimationSprite
         }
     }
 
+   
     void Attack(Vector2 inputVector)
     {
         if (Input.GetKeyDown(player_id == 0 ? Key.C : Key.COMMA))
         {
-            Attack attack = new Attack((int)(inputVector.x), this, DesignerChanges.attackTime);
-            AddChild(attack);
-            attacking = true;
+            FindAttackType(singleAttackType, inputVector);
             canAttack = false;
             attackCooldown.reset();
         }
         else if (Input.GetKeyDown(player_id == 0 ? Key.V : Key.DOT))
         {
-            Boomerang boomerang = new Boomerang((int)(inputVector.x), this, DesignerChanges.boomerangFloatTime);
-            game.AddChild(boomerang);
+            FindAttackType(specialAttackType, inputVector);
             //attacking = true;
             canAttack = false;
             attackCooldown.reset();
+        }
+    }
+
+    void FindAttackType(String inputString, Vector2 inputVector)
+    {
+        switch (inputString)
+        {
+            case "normal":
+                Attack attack = new Attack((int)(inputVector.x), this, DesignerChanges.attackTime);
+                AddChild(attack);
+                attacking = true;
+                break;
+            case "boomerang":
+                Boomerang boomerang = new Boomerang((int)(inputVector.x), this, DesignerChanges.boomerangFloatTime);
+                game.AddChild(boomerang);
+                break;
         }
     }
 
