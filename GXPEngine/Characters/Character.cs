@@ -34,7 +34,7 @@ public class Character : AnimationSprite
 
     Timer attackCooldown;
 
-    public Character(Sprite imageFileName = "lemonster-stand.png") : base(imageFileName, 4, 1)
+    public Character(string imageFileName = "lemonster-stand.png") : base(imageFileName, 4, 1)
     {
         max_move_speed = DesignerChanges.max_move_speed;
         move_speed_up = DesignerChanges.move_speed_up;
