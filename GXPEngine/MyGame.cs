@@ -10,20 +10,34 @@ using System.Diagnostics.SymbolStore;
 public class MyGame : Game {
     public int currentLevel;
 
+    private Attack attack;
+    private Boomerang boomerang;
+
     public MyGame() : base(1366, 768, false, true, 600, 400)     // Create a window that's 800x600 and NOT fullscreen
 	{
-        Character cha = new Character();
-        cha.player_id = 0;
+        StartGame();
+	}
+
+    void StartGame()
+    {
+        LoadAttacks();
+
+        Character cha = new Character(0, this, new Attack(DesignerChanges.attackTime), new Boomerang(DesignerChanges.boomerangFloatTime));
         cha.x = 300;
         AddChild(cha);
 
-        Character che = new Character();
-        che.player_id = 1;
+        Character che = new Character(1, this, new Attack(DesignerChanges.attackTime), new Boomerang(DesignerChanges.boomerangFloatTime));
         che.x = 1000;
         AddChild(che);
         che.other = cha;
         cha.other = che;
-	}
+    }
+
+    public void ResetGame()
+    {
+        DestroyAll();
+        StartGame();
+    }
 
     // For every game object, Update is called every frame, by the engine:
     void Update() {
@@ -35,42 +49,20 @@ public class MyGame : Game {
 		new MyGame().Start();                   // Create a "MyGame" and start it
 	}
 
-    public void changeLevel(int changeTo)
-    {
-        destroyAll();
-
-        loadLevel(changeTo);
-    }
-
-    void loadLevel(int levelNum)
-    {
-        currentLevel = levelNum;
-
-        //Level myLevel = new Level(this);
-        //AddChild(myLevel);
-        
 
 
-        //Console.WriteLine(levelData);
-
-        /*
-        SetupLevels setupLevels = new SetupLevels();
-        List<Vector2> corners = new List<Vector2>();
-
-        for (int i = 0; i < setupLevels.pathes.GetLength(1); i++)
-        {
-            corners.Add(setupLevels.pathes[levelNum, i]);
-        }
-
-        */
-    }
-
-    void destroyAll()
+    void DestroyAll()
     {
         List<GameObject> children = GetChildren();
         foreach (GameObject child in children)
         {
             child.LateDestroy();
         }
+    }
+
+    void LoadAttacks()
+    {
+        attack = new Attack(DesignerChanges.attackTime);
+        boomerang = new Boomerang(DesignerChanges.boomerangFloatTime);
     }
 }

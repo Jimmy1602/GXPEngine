@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,17 +14,25 @@ public class Boomerang : Attack
     private Vector2 moveVector = new Vector2();
     private int speed;
 
-    public Boomerang(int direction, Character Pcaster, int attackTime) : base(direction, Pcaster, attackTime)
+    
+    bool canHit = true;
+
+    public Boomerang(int attackTime) : base(attackTime)
     {
-        x = getCasterPosition().x;
-        y = getCasterPosition().y;
         speed = DesignerChanges.boomerangSpeed;
+    }
+
+    public override void Spawn(int direction, Character Pcaster)
+    {
+        UniversalSpawn(Pcaster);
         moveVector.x = direction * speed + caster.moveVector.x;
     }
 
-
     void Update()
     {
+        if (!visible)
+            return;
+
         position = new Vector2(x, y);
         if (attackTimer.cooldownDone())
         {
@@ -34,10 +43,7 @@ public class Boomerang : Attack
             moveAway();
         }
 
-        if (HitTest(caster.other))
-        {
-            HitPlayer(caster.other);
-        }
+        collisionHandeling();
     }
 
     void moveAway()
@@ -51,18 +57,18 @@ public class Boomerang : Attack
         {
             Die();
         }
-        moveVector = moveVector.subVectors(position, caster.moveVector);
-        moveVector = moveVector.setMagnetude(moveVector, 1);
+        moveVector = moveVector.subVectors(getCasterPosition(), position);
+        moveVector = moveVector.setMagnetude(moveVector, speed * 2);
     }
 
-    void HitPlayer(Character target)
+    protected override void HitPlayer(Character target)
     {
         target.getHit(DesignerChanges.boomerangDamage, new Vector2(moveVector.x * DesignerChanges.boomerangKnockbackX, moveVector.y * DesignerChanges.boomerangKnockbackY));
     }
 
-    new void Die()
+    protected override void Die()
     {
         caster.canAttack = true;
-        LateDestroy();
+        visible = false;
     }
 }

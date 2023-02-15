@@ -9,5 +9,8 @@ using GXPEngine.Core;
 
 public class lemonster : Character
 {
+    public lemonster(int playerId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack) : base(playerId, pMyGame, pBasicAttack, pSpecialAttack)
+    {
 
+    }
 }

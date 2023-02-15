@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing.Text;
 using System.Linq;
@@ -38,8 +39,21 @@ public class Character : AnimationSprite
 
     Timer attackCooldown;
 
-    public Character(int rows = 4, int columns = 1, string imageFileName = "lemonster-stand.png") : base(imageFileName, rows, columns)
+    EasyDraw damageDisplay = new EasyDraw(200, 200, false);
+
+    MyGame myGame;
+
+    Attack basicAttack;
+    Attack specialAttack;
+
+    public Character(int pPlayerId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, int rows = 4, int columns = 1, string imageFileName = "lemonster-stand.png") : base(imageFileName, rows, columns)
     {
+        player_id = pPlayerId;
+        myGame = pMyGame;
+
+        basicAttack = pBasicAttack;
+        specialAttack = pSpecialAttack;
+
         max_move_speed = DesignerChanges.max_move_speed;
         move_speed_up = DesignerChanges.move_speed_up;
         move_slow_down = DesignerChanges.move_slow_down;
@@ -52,35 +66,47 @@ public class Character : AnimationSprite
 
         singleAttackType = "normal";
         specialAttackType = "boomerang";
+
    
         y = 600;
-        width = width * 3;
-        height = height * 3;
+        width = width * 2;
+        height = height * 2;
         y = 600;
+
+        SetupUI();
+
     }
 
     void Update()
     {
-        Console.WriteLine(y);
         if (attacking)
         {
             SetColor(1, 0, 0);
             return;
         }
+
         Vector2 inputVector = MoveInputHandeling();
 
         Movement(inputVector);
 
-        if (attackCooldown.cooldownDone() || canAttack)
+        if (attackCooldown.cooldownDone())
+        {
+            canAttack = true;
+        }
+
+        if (Input.GetKeyDown(player_id == 0 ? Key.V : Key.COMMA) && (attackCooldown.cooldownDone() || canAttack))
         {
             Attack(directionVector);
+        }
+        else if (canAttack)
+        {
             SetColor(1, 1, 1);
         }
         else
         {
-
             SetColor(1, 0, 0);
         }
+
         if (!grounded)
         {
             Fall();
@@ -91,41 +117,36 @@ public class Character : AnimationSprite
         if(inputVector.x != 0)
         {
             directionVector.x = inputVector.x;
+
+            if (inputVector.x < 0)
+            {
+                Mirror(true, false);
+            }
+            else
+            {
+                Mirror(false, false);
+            }
         }
+
+        Die();
     }
 
    
     void Attack(Vector2 inputVector)
     {
-        if (Input.GetKeyDown(player_id == 0 ? Key.C : Key.COMMA))
+        Attack attack;
+        if (grounded)
         {
-            FindAttackType(singleAttackType, inputVector);
-            canAttack = false;
-            attackCooldown.reset();
+            attack = basicAttack;
         }
-        else if (Input.GetKeyDown(player_id == 0 ? Key.V : Key.DOT))
+        else
         {
-            FindAttackType(specialAttackType, inputVector);
-            //attacking = true;
-            canAttack = false;
-            attackCooldown.reset();
+            attack = specialAttack;
         }
-    }
 
-    void FindAttackType(String inputString, Vector2 inputVector)
-    {
-        switch (inputString)
-        {
-            case "normal":
-                Attack attack = new Attack((int)(inputVector.x), this, DesignerChanges.attackTime);
-                AddChild(attack);
-                attacking = true;
-                break;
-            case "boomerang":
-                Boomerang boomerang = new Boomerang((int)(inputVector.x), this, DesignerChanges.boomerangFloatTime);
-                game.AddChild(boomerang);
-                break;
-        }
+        attackCooldown.reset();
+        canAttack = false;
+        attack.Spawn(_mirrorX ? -1 : 1, this);
     }
 
     Vector2 MoveInputHandeling()
@@ -218,8 +239,37 @@ public class Character : AnimationSprite
     public void getHit(int dmg, Vector2 direction)
     {
         damage += dmg;
+        UpdateUI();
         grounded = false;
         moveVector = direction.multiplyVector(direction, damage);
+    }
+
+    private void SetupUI()
+    {
+        damageDisplay.SetOrigin(0, 0);
+        damageDisplay.SetXY(player_id == 0 ? 0 : game.width - damageDisplay.width, 0);
+
+        Console.WriteLine(damageDisplay.y);
+
+        damageDisplay.TextAlign(CenterMode.Center, CenterMode.Center);
+        damageDisplay.Fill(255);
+        damageDisplay.TextSize(50);
+        damageDisplay.Text(damage.ToString());
+        game.AddChild(damageDisplay);
+    }
+
+    private void UpdateUI()
+    {
+        damageDisplay.ClearTransparent();
+        damageDisplay.Text(damage.ToString());
+    }
+
+    private void Die()
+    {
+        if(x < -150 || x > game.width + 150 || y < -150)
+        {
+            myGame.ResetGame();
+        }
     }
 }
 

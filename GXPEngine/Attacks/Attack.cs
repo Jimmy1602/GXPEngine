@@ -15,30 +15,62 @@ public class Attack : Sprite
     protected Timer attackTimer;
     protected Character caster;
 
-    public Attack(int direction, Character Pcaster, int attackTime, String imageFilename = "circle.png") : base(imageFilename)
+    Timer iFrames = new Timer(300, true);
+    protected bool canHit = true;
+
+    public Attack(int attackTime, String imageFilename = "circle.png") : base(imageFilename)
     {
-        if(direction != 0)
-            xOffSet *= direction;
-
-
-
         attackTimer = new Timer(attackTime);
+    }
 
+    public virtual void Spawn(int direction, Character Pcaster)
+    {
+        xOffSet = direction * 100;
+
+        UniversalSpawn(Pcaster);
+
+        caster.attacking = true;
+        x += xOffSet;
+    }
+
+    protected void UniversalSpawn(Character Pcaster)
+    {
+        if (parent == null)
+        {
+            game.AddChild(this);
+        }
+        visible = true;
+        attackTimer.reset();
         caster = Pcaster;
+        caster.canAttack = false;
         x = getCasterPosition().x;
         y = getCasterPosition().y;
-        x += xOffSet;
     }
 
     void Update()
     {
+        if (!visible)
+            return;
+
         if (attackTimer.cooldownDone())
         {
             Die();
         }
 
-        if (HitTest(caster.other))
+        collisionHandeling();
+    }
+
+    protected void collisionHandeling()
+    {
+        if (!HitTest(caster.other) || iFrames.cooldownDone())
         {
+            canHit = true;
+        }
+
+        if (HitTest(caster.other) && canHit)
+        {
+            iFrames.reset();
+            canHit = false;
             HitPlayer(caster.other);
         }
     }
@@ -48,16 +80,15 @@ public class Attack : Sprite
         return new Vector2(caster.x + caster.width / 2, caster.y + caster.height / 2);
     }
 
-    void HitPlayer(Character target)
+    protected virtual void HitPlayer(Character target)
     {
         target.getHit(DesignerChanges.attackDamage, new Vector2(xOffSet/100 * DesignerChanges.attackKnockbackX, -DesignerChanges.attackKnockbackY));
-        caster.attacking = false;
-        Die();
+        
     }
 
-    protected void Die()
+    protected virtual void Die()
     {
-        LateDestroy();
+        visible = false;
         caster.attacking = false;
     }
 }
