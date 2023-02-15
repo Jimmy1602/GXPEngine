@@ -60,6 +60,7 @@
     <Compile Include="Attacks\Boomerang.cs" />
     <Compile Include="Characters\lemonster.cs" />
     <Compile Include="Characters\madberry.cs" />
+    <Compile Include="cardreader.cs" />
     <Compile Include="DesignerChanges.cs" />
     <Compile Include="JimmyEngine\Bar.cs" />
     <Compile Include="JimmyEngine\Button.cs" />

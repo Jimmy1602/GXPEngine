@@ -61,6 +61,7 @@ public class Character : AnimationSprite
 
     void Update()
     {
+
         Console.WriteLine(y);
         if (attacking)
         {
