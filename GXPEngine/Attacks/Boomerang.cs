@@ -15,7 +15,8 @@ public class Boomerang : Attack
 
     public Boomerang(int direction, Character Pcaster, int attackTime) : base(direction, Pcaster, attackTime)
     {
-        x = caster.x; y = caster.y;
+        x = getCasterPosition().x;
+        y = getCasterPosition().y;
         speed = DesignerChanges.boomerangSpeed;
         moveVector.x = direction * speed + caster.moveVector.x;
     }
@@ -46,7 +47,7 @@ public class Boomerang : Attack
 
     void moveBack()
     {
-        if(moveTowards(new Vector2(caster.x, caster.y), speed * 2, speed * 2))
+        if(moveTowards(getCasterPosition(), speed * 2, speed * 2))
         {
             Die();
         }

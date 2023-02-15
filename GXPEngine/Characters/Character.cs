@@ -34,7 +34,7 @@ public class Character : AnimationSprite
 
     Timer attackCooldown;
 
-    public Character(string imageFileName = "lemonster-stand.png") : base(imageFileName, 4, 1)
+    public Character(int rows = 4, int columns = 1, string imageFileName = "lemonster-stand.png") : base(imageFileName, rows, columns)
     {
         max_move_speed = DesignerChanges.max_move_speed;
         move_speed_up = DesignerChanges.move_speed_up;
@@ -48,13 +48,14 @@ public class Character : AnimationSprite
 
 
    
-        y = 600;
         width = width * 3;
         height = height * 3;
+        y = 600;
     }
 
     void Update()
     {
+        Console.WriteLine(y);
         if (attacking)
         {
             SetColor(1, 0, 0);
@@ -92,7 +93,7 @@ public class Character : AnimationSprite
         if (Input.GetKeyDown(player_id == 0 ? Key.C : Key.COMMA))
         {
             Attack attack = new Attack((int)(inputVector.x), this, DesignerChanges.attackTime);
-            AddChild(attack);
+            game.AddChild(attack);
             attacking = true;
             canAttack = false;
             attackCooldown.reset();
@@ -186,9 +187,9 @@ public class Character : AnimationSprite
 
         y += moveVector.y;
 
-        if (y > 700)
+        if (y > 600)
         {
-            y = 700;
+            y = 600;
             moveVector.y = 0;
             grounded = true;
         }

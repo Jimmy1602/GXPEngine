@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,11 +20,14 @@ public class Attack : Sprite
         if(direction != 0)
             xOffSet *= direction;
 
-        x += xOffSet;
+
 
         attackTimer = new Timer(attackTime);
 
         caster = Pcaster;
+        x = getCasterPosition().x;
+        y = getCasterPosition().y;
+        x += xOffSet;
     }
 
     void Update()
@@ -37,6 +41,11 @@ public class Attack : Sprite
         {
             HitPlayer(caster.other);
         }
+    }
+
+    protected Vector2 getCasterPosition()
+    {
+        return new Vector2(caster.x + caster.width / 2, caster.y + caster.height / 2);
     }
 
     void HitPlayer(Character target)
