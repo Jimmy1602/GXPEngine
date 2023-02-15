@@ -38,15 +38,8 @@ public class Character : AnimationSprite
 
     Timer attackCooldown;
 
-    private EasyDraw damageDisplay;
-
-    MyGame myGame;
-
-    public Character(MyGame pMyGame, int pPlayer_id, int rows = 4, int columns = 1, string imageFileName = "lemonster-stand.png") : base(imageFileName, rows, columns)
+    public Character(int rows = 4, int columns = 1, string imageFileName = "lemonster-stand.png") : base(imageFileName, rows, columns)
     {
-        myGame = pMyGame;
-        player_id = pPlayer_id;
-
         max_move_speed = DesignerChanges.max_move_speed;
         move_speed_up = DesignerChanges.move_speed_up;
         move_slow_down = DesignerChanges.move_slow_down;
@@ -61,15 +54,14 @@ public class Character : AnimationSprite
         specialAttackType = "boomerang";
    
         y = 600;
-        width = width * 2;
-        height = height * 2;
+        width = width * 3;
+        height = height * 3;
         y = 600;
-
-        SetUpUI();
     }
 
     void Update()
     {
+        Console.WriteLine(y);
         if (attacking)
         {
             SetColor(1, 0, 0);
@@ -100,12 +92,6 @@ public class Character : AnimationSprite
         {
             directionVector.x = inputVector.x;
         }
-
-        if (x < -150 || x > game.width + 150 || y < -150 || y > game.height + 150)
-        {
-            Die();
-            Console.WriteLine("I have a vey small penis");
-        }
     }
 
    
@@ -132,7 +118,7 @@ public class Character : AnimationSprite
         {
             case "normal":
                 Attack attack = new Attack((int)(inputVector.x), this, DesignerChanges.attackTime);
-                game.AddChild(attack);
+                AddChild(attack);
                 attacking = true;
                 break;
             case "boomerang":
@@ -196,30 +182,6 @@ public class Character : AnimationSprite
         }
     }
 
-    private void SetUpUI()
-    {
-        damageDisplay = new EasyDraw(200, 100, false);
-
-        damageDisplay.Fill(255, 255, 255);
-        damageDisplay.TextAlign(CenterMode.Center, CenterMode.Center);
-        damageDisplay.TextSize(50);
-
-        damageDisplay.Text(damage.ToString());
-
-
-
-        damageDisplay.SetOrigin(0, 0);
-        damageDisplay.SetXY(player_id == 0 ? 0 : game.width - damageDisplay.width, 0);
-
-        game.AddChild(damageDisplay);
-    }
-
-    private void UpdateUI()
-    {
-        damageDisplay.ClearTransparent();
-        damageDisplay.Text(damage.ToString());
-    }
-
     private void SlowDown(Vector2 inputVector, int slow_down)
     {
         if(moveVector.x > slow_down && inputVector.x < 1)
@@ -253,17 +215,11 @@ public class Character : AnimationSprite
         }
     }
 
-    public void GetHit(int dmg, Vector2 direction)
+    public void getHit(int dmg, Vector2 direction)
     {
         damage += dmg;
-        UpdateUI();
         grounded = false;
         moveVector = direction.multiplyVector(direction, damage);
-    }
-
-    private void Die()
-    {
-        myGame.ResetGame();
     }
 }
 

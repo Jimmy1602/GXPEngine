@@ -25,8 +25,8 @@ public class Attack : Sprite
         attackTimer = new Timer(attackTime);
 
         caster = Pcaster;
-        x = GetCasterPosition().x;
-        y = GetCasterPosition().y;
+        x = getCasterPosition().x;
+        y = getCasterPosition().y;
         x += xOffSet;
     }
 
@@ -43,14 +43,14 @@ public class Attack : Sprite
         }
     }
 
-    protected Vector2 GetCasterPosition()
+    protected Vector2 getCasterPosition()
     {
         return new Vector2(caster.x + caster.width / 2, caster.y + caster.height / 2);
     }
 
     void HitPlayer(Character target)
     {
-        target.GetHit(DesignerChanges.attackDamage, new Vector2(xOffSet/100 * DesignerChanges.attackKnockbackX, -DesignerChanges.attackKnockbackY));
+        target.getHit(DesignerChanges.attackDamage, new Vector2(xOffSet/100 * DesignerChanges.attackKnockbackX, -DesignerChanges.attackKnockbackY));
         caster.attacking = false;
         Die();
     }

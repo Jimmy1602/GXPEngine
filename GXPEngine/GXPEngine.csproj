@@ -58,11 +58,7 @@
   <ItemGroup>
     <Compile Include="Attacks\Attack.cs" />
     <Compile Include="Attacks\Boomerang.cs" />
-<<<<<<< HEAD
-=======
-    <Compile Include="Characters\lemonster.cs" />
     <Compile Include="Characters\madberry.cs" />
->>>>>>> 20f38d526a0c0c4e80632d5fc6895d4b3866399f
     <Compile Include="DesignerChanges.cs" />
     <Compile Include="JimmyEngine\Bar.cs" />
     <Compile Include="JimmyEngine\Button.cs" />
