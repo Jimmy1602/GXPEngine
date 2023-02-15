@@ -20,13 +20,14 @@ public static class DesignerChanges
     public static int attackTime = 200;
     public static int attackCooldown = 1000;
     public static int attackDamage = 5;
-    public static int attackKnockbackX = 3;
-    public static int attackKnockbackY = 3;
+    public static float attackKnockbackX = 3f;
+    public static float attackKnockbackY = 3f;
 
     public static int boomerangFloatTime = 500;
     public static int boomerangSpeed = 10;
     public static int boomerangDamage = 2;
-    public static int boomerangKnockbackX = 3;
-    public static int boomerangKnockbackY = 3;
+    public static float boomerangBaseKnockbackY = 10f;
+    public static float boomerangKnockbackX = 0.3f;
+    public static float boomerangKnockbackY = 0.3f;
 
 }

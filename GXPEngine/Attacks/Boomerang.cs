@@ -13,10 +13,13 @@ public class Boomerang : Attack
     private Vector2 moveVector = new Vector2();
     private int speed;
 
+    Timer IFrames = new Timer(400, true);
+    private bool canHit = true;
+
     public Boomerang(int direction, Character Pcaster, int attackTime) : base(direction, Pcaster, attackTime)
     {
-        x = getCasterPosition().x;
-        y = getCasterPosition().y;
+        x = GetCasterPosition().x;
+        y = GetCasterPosition().y;
         speed = DesignerChanges.boomerangSpeed;
         moveVector.x = direction * speed + caster.moveVector.x;
     }
@@ -27,37 +30,45 @@ public class Boomerang : Attack
         position = new Vector2(x, y);
         if (attackTimer.cooldownDone())
         {
-            moveBack();
+            MoveBack();
         }
         else
         {
-            moveAway();
+            MoveAway();
         }
 
-        if (HitTest(caster.other))
+        if (IFrames.cooldownDone() || !HitTest(caster.other))
         {
+            canHit = true;
+        }
+
+        if (HitTest(caster.other) && canHit)
+        {
+            IFrames.reset();
+            canHit = false;
             HitPlayer(caster.other);
         }
     }
 
-    void moveAway()
+    void MoveAway()
     {
         x += moveVector.x;
     }
 
-    void moveBack()
+    void MoveBack()
     {
-        if(moveTowards(getCasterPosition(), speed * 2, speed * 2))
+        if(moveTowards(GetCasterPosition(), speed * 2, speed * 2))
         {
             Die();
         }
-        moveVector = moveVector.subVectors(position, caster.moveVector);
-        moveVector = moveVector.setMagnetude(moveVector, 1);
+        moveVector = moveVector.subVectors(GetCasterPosition(), position);
+        moveVector = moveVector.setMagnetude(moveVector, speed * 2);
     }
 
     void HitPlayer(Character target)
     {
-        target.getHit(DesignerChanges.boomerangDamage, new Vector2(moveVector.x * DesignerChanges.boomerangKnockbackX, moveVector.y * DesignerChanges.boomerangKnockbackY));
+
+        target.GetHit(DesignerChanges.boomerangDamage, new Vector2(moveVector.x * DesignerChanges.boomerangKnockbackX, moveVector.y - DesignerChanges.boomerangBaseKnockbackY * DesignerChanges.boomerangKnockbackY));
     }
 
     new void Die()

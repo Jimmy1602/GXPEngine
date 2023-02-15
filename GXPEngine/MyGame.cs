@@ -12,18 +12,35 @@ public class MyGame : Game {
 
     public MyGame() : base(1366, 768, false, true, 600, 400)     // Create a window that's 800x600 and NOT fullscreen
 	{
-        Character cha = new Character();
-        cha.player_id = 0;
+        StartGame();
+	}
+
+    void StartGame()
+    {
+        Character cha = new Character(this, 0);
         cha.x = 300;
         AddChild(cha);
 
-        Character che = new Character();
-        che.player_id = 1;
+        Character che = new Character(this, 1);
         che.x = 1000;
         AddChild(che);
         che.other = cha;
         cha.other = che;
-	}
+    }
+
+    public void ResetGame()
+    {
+        DeleteEverything();
+        StartGame();
+    }
+
+    void DeleteEverything()
+    {
+        foreach (GameObject n in GetChildren())
+        {
+            n.LateDestroy();
+        }
+    }
 
     // For every game object, Update is called every frame, by the engine:
     void Update() {
