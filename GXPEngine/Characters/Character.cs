@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 using GXPEngine;
 using GXPEngine.Core;
 
-public class Character : Sprite
+public class Character : AnimationSprite
 {
     public int player_id = 0;
 
     public Character other;
 
-    protected Vector2 moveVector = new Vector2();
+    public Vector2 moveVector = new Vector2();
     protected Vector2 directionVector = new Vector2();
 
     protected int max_move_speed;
@@ -28,37 +28,52 @@ public class Character : Sprite
 
     bool grounded = true;
     public bool attacking = false;
+    public bool canAttack = true;
 
     int damage;
 
     Timer attackCooldown;
 
-    public Character(DesignerChanges design) : base("triangle.png")
+    public Character() : base("lemonster-stand.png", 4, 1)
     {
-        Console.WriteLine(collider);
-        max_move_speed = design.max_move_speed;
-        move_speed_up = design.move_speed_up;
-        move_slow_down = design.move_slow_down;
-        ground_slow_down = design.ground_slow_down;
-        jump_height = design.jump_height;
-        max_gravity = design.max_gravity;
-        gravity = design.gravity;
+        max_move_speed = DesignerChanges.max_move_speed;
+        move_speed_up = DesignerChanges.move_speed_up;
+        move_slow_down = DesignerChanges.move_slow_down;
+        ground_slow_down = DesignerChanges.ground_slow_down;
+        jump_height = DesignerChanges.jump_height;
+        max_gravity = DesignerChanges.max_gravity;
+        gravity = DesignerChanges.gravity;
 
-        attackCooldown = new Timer(design.attackCooldown, true);
+        attackCooldown = new Timer(DesignerChanges.attackCooldown, true);
 
-        y = 500;
+
+   
+        y = 600;
+        width = width * 3;
+        height = height * 3;
     }
 
     void Update()
     {
         if (attacking)
+        {
+            SetColor(1, 0, 0);
             return;
+        }
         Vector2 inputVector = MoveInputHandeling();
 
         Movement(inputVector);
 
-        Attack(directionVector);
+        if (attackCooldown.cooldownDone() || canAttack)
+        {
+            Attack(directionVector);
+            SetColor(1, 1, 1);
+        }
+        else
+        {
 
+            SetColor(1, 0, 0);
+        }
         if (!grounded)
         {
             Fall();
@@ -74,11 +89,20 @@ public class Character : Sprite
 
     void Attack(Vector2 inputVector)
     {
-        if (Input.GetKeyDown(player_id == 0 ? Key.C : Key.COMMA) && attackCooldown.cooldownDone())
+        if (Input.GetKeyDown(player_id == 0 ? Key.C : Key.COMMA))
         {
-            Attack attack = new Attack((int)(inputVector.x), this);
+            Attack attack = new Attack((int)(inputVector.x), this, DesignerChanges.attackTime);
             AddChild(attack);
             attacking = true;
+            canAttack = false;
+            attackCooldown.reset();
+        }
+        else if (Input.GetKeyDown(player_id == 0 ? Key.V : Key.DOT))
+        {
+            Boomerang boomerang = new Boomerang((int)(inputVector.x), this, DesignerChanges.boomerangFloatTime);
+            game.AddChild(boomerang);
+            //attacking = true;
+            canAttack = false;
             attackCooldown.reset();
         }
     }
@@ -162,20 +186,19 @@ public class Character : Sprite
 
         y += moveVector.y;
 
-        if (y > 500)
+        if (y > 700)
         {
-            y = 500;
+            y = 700;
             moveVector.y = 0;
             grounded = true;
         }
     }
 
-    public void getHit(Vector2 direction)
+    public void getHit(int dmg, Vector2 direction)
     {
-        damage += 5;
+        damage += dmg;
         grounded = false;
         moveVector = direction.multiplyVector(direction, damage);
-        Console.WriteLine(moveVector);
     }
 }
 

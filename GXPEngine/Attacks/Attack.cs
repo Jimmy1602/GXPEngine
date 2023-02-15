@@ -8,31 +8,29 @@ using System.Threading.Tasks;
 using GXPEngine;
 using GXPEngine.Core;
 
-class Attack : Sprite
+public class Attack : Sprite
 {
     int xOffSet = 100;
-    Timer attackTime;
-    DesignerChanges design = new DesignerChanges();
-    Character caster;
+    protected Timer attackTimer;
+    protected Character caster;
 
-    public Attack(int direction, Character Pcaster) : base("circle.png")
+    public Attack(int direction, Character Pcaster, int attackTime, String imageFilename = "circle.png") : base(imageFilename)
     {
         if(direction != 0)
             xOffSet *= direction;
 
         x += xOffSet;
 
-        attackTime = new Timer(design.attackTime);
+        attackTimer = new Timer(attackTime);
 
         caster = Pcaster;
     }
 
     void Update()
     {
-        if (attackTime.cooldownDone())
+        if (attackTimer.cooldownDone())
         {
-            caster.attacking = false;
-            LateDestroy();
+            Die();
         }
 
         if (HitTest(caster.other))
@@ -43,9 +41,15 @@ class Attack : Sprite
 
     void HitPlayer(Character target)
     {
-        target.getHit(new Vector2(xOffSet/30, -xOffSet/30));
+        target.getHit(DesignerChanges.attackDamage, new Vector2(xOffSet/100 * DesignerChanges.attackKnockbackX, -DesignerChanges.attackKnockbackY));
         caster.attacking = false;
+        Die();
+    }
+
+    protected void Die()
+    {
         LateDestroy();
+        caster.attacking = false;
     }
 }
 

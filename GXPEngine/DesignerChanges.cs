@@ -1,21 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using GXPEngine.Core;
 
-public class DesignerChanges
+public static class DesignerChanges
 {
-    public int max_move_speed = 15;
-    public int move_speed_up = 1;
-    public int move_slow_down = 3;
-    public int ground_slow_down = 10;
+    public static int max_move_speed = 15;
+    public static int move_speed_up = 1;
+    public static int move_slow_down = 2;
+    public static int ground_slow_down = 10;
 
-    public int jump_height = 25;
-    public int max_gravity = 40;
-    public int gravity = 1;
+    public static int jump_height = 25;
+    public static int max_gravity = 40;
+    public static int gravity = 1;
 
-    public int attackTime = 200;
-    public int attackCooldown = 1000;
+    public static int attackTime = 200;
+    public static int attackCooldown = 1000;
+    public static int attackDamage = 5;
+    public static int attackKnockbackX = 3;
+    public static int attackKnockbackY = 3;
+
+    public static int boomerangFloatTime = 500;
+    public static int boomerangSpeed = 10;
+    public static int boomerangDamage = 2;
+    public static int boomerangKnockbackX = 3;
+    public static int boomerangKnockbackY = 3;
 }

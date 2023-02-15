@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using GXPEngine;
 using GXPEngine.Core;
-class Timer
+public class Timer
 {
     int cooldown;
     int passedTime = 0;

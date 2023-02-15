@@ -9,16 +9,17 @@ using System.Diagnostics.SymbolStore;
 
 public class MyGame : Game {
     public int currentLevel;
-    DesignerChanges designerChanges = new DesignerChanges();
 
     public MyGame() : base(1366, 768, false, true, 600, 400)     // Create a window that's 800x600 and NOT fullscreen
 	{
-        Character cha = new Character(designerChanges);
+        Character cha = new Character();
         cha.player_id = 0;
+        cha.x = 300;
         AddChild(cha);
 
-        Character che = new Character(designerChanges);
+        Character che = new Character();
         che.player_id = 1;
+        che.x = 1000;
         AddChild(che);
         che.other = cha;
         cha.other = che;

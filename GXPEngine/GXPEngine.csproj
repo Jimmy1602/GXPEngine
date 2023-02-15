@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attacks\Attack.cs" />
+    <Compile Include="Attacks\Boomerang.cs" />
     <Compile Include="DesignerChanges.cs" />
     <Compile Include="JimmyEngine\Bar.cs" />
     <Compile Include="JimmyEngine\Button.cs" />
