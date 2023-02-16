@@ -8,26 +8,26 @@ using GXPEngine.Core;
 
 public static class DesignerChanges
 {
-    public static int maxMoveSpeed = 15;
-    public static float moveSpeedUp = 1;
+    public static int maxMoveSpeed = 10;
+    public static float moveSpeedUp = 0.5f;
     public static float moveSlowDown = 1;
     public static float groundSlowDown = 2;
 
     public static int dashCheckTime = 250;
     public static int dashTime = 100;
-    public static int dashSpeed = 30;
+    public static int dashSpeed = 20;
     public static int jumpBuffer = 300;
 
-    public static float jumpHeight = 10;
+    public static float jumpHeight = 10f;
     public static int jumpHoldTime = 150;
-    public static float jumpHoldHeight = 1;
+    public static float jumpHoldHeight = 0.5f;
 
 
     public static int maxGravity = 40;
     public static float gravity = 0.5f;
 
     public static int attackTime = 200;
-    public static int attackCooldown = 1000;
+    public static int attackCooldown = 100;
     public static float attackDamage = 3;
     public static float attackKnockbackX = 2;
     public static float attackKnockbackY = 2;
