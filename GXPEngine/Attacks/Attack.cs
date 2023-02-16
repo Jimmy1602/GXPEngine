@@ -67,7 +67,7 @@ public class Attack : Sprite
             canHit = true;
         }
 
-        if (HitTest(caster.other) && canHit)
+        if (HitTest(caster.other) && canHit && caster.other.dashTimer.cooldownDone())
         {
             iFrames.reset();
             canHit = false;

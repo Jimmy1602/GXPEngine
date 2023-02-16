@@ -10,28 +10,33 @@ using System.Diagnostics.SymbolStore;
 public class MyGame : Game {
     public int currentLevel;
 
-    private Attack attack;
-    private Boomerang boomerang;
 
-    public MyGame() : base(1366, 768, false, true, 600, 400)     // Create a window that's 800x600 and NOT fullscreen
+    private Character banana;
+    private Character lemon;
+
+    private Character playerOne;
+    private Character playerTwo;
+
+    public MyGame() : base(1366, 768, false, true, 600, 400)
 	{
         StartGame();
 	}
 
     void StartGame()
     {
-        LoadAttacks();
+        LoadCharackters();
 
-        Character cha = new Character(0, this, new Attack(DesignerChanges.attackTime), new Boomerang(DesignerChanges.boomerangFloatTime));
-        cha.x = 300;
-        AddChild(cha);
-
-        Character che = new Character(1, this, new Attack(DesignerChanges.attackTime), new Boomerang(DesignerChanges.boomerangFloatTime));
-        che.x = 1000;
-        AddChild(che);
-        che.other = cha;
-        cha.other = che;
+        banana.Spawn(0, lemon);
+        lemon.Spawn(1, banana);
     }
+
+    void LoadCharackters()
+    {
+        banana = new Character(this, new Attack(DesignerChanges.attackTime), new Boomerang(DesignerChanges.boomerangFloatTime));
+        lemon = new Character(this, new Boomerang(DesignerChanges.boomerangFloatTime), new Attack(DesignerChanges.attackTime));
+    }
+
+
 
     public void ResetGame()
     {
@@ -61,9 +66,4 @@ public class MyGame : Game {
         }
     }
 
-    void LoadAttacks()
-    {
-        attack = new Attack(DesignerChanges.attackTime);
-        boomerang = new Boomerang(DesignerChanges.boomerangFloatTime);
-    }
 }

@@ -26,6 +26,11 @@ public class Timer
         cooldown = newCooldown;
     }
 
+    public void forceCompleteCooldown()
+    {
+        passedTime = -cooldown;
+    }
+
     public bool cooldownDone()
     {
         if(Time.time > passedTime + cooldown)

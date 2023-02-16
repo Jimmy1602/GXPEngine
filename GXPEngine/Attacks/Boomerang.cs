@@ -15,7 +15,6 @@ public class Boomerang : Attack
     private int speed;
 
     
-    bool canHit = true;
 
     public Boomerang(int attackTime) : base(attackTime)
     {
@@ -53,12 +52,12 @@ public class Boomerang : Attack
 
     void moveBack()
     {
-        if(moveTowards(getCasterPosition(), speed * 2, speed * 2))
+        if(moveTowards(getCasterPosition(), DesignerChanges.boomerangBackSpeed, DesignerChanges.boomerangBackSpeed))
         {
             Die();
         }
         moveVector = moveVector.subVectors(getCasterPosition(), position);
-        moveVector = moveVector.setMagnetude(moveVector, speed * 2);
+        moveVector = moveVector.setMagnetude(moveVector, DesignerChanges.boomerangBackSpeed);
     }
 
     protected override void HitPlayer(Character target)

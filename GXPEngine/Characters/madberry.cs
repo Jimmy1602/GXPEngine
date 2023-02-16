@@ -9,7 +9,7 @@ using GXPEngine.Core;
 
 public class madberry : Character
 {
-    public madberry(int playerId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack) : base(playerId, pMyGame, pBasicAttack, pSpecialAttack)
+    public madberry(MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack) : base(pMyGame, pBasicAttack, pSpecialAttack)
     {
 
     }

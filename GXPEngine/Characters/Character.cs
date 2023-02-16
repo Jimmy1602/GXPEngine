@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,7 +13,7 @@ using GXPEngine.Core;
 
 public class Character : AnimationSprite
 {
-    public int player_id = 0;
+    public int playerId = 0;
 
     public Character other;
 
@@ -20,24 +21,30 @@ public class Character : AnimationSprite
     protected Vector2 directionVector = new Vector2();
 
     protected int max_move_speed;
-    protected int move_speed_up;
-    protected int move_slow_down;
-    protected int ground_slow_down;
+    protected float move_speed_up;
+    protected float move_slow_down;
+    protected float ground_slow_down;
 
-    protected int jump_height;
+    protected float jump_height;
     protected int max_gravity;
-    protected int gravity;
-
-    protected string singleAttackType;
-    protected string specialAttackType;
+    protected float gravity;
 
     bool grounded = true;
     public bool attacking = false;
     public bool canAttack = true;
+    private int dashDir = 0;
 
-    int damage;
+    protected bool canDoubleJump = true;
+    protected bool isJumpHeld = false;
+    protected Timer jumpBuffer = new Timer(DesignerChanges.jumpBuffer, true);
 
-    Timer attackCooldown;
+    Timer dashCheckTimer = new Timer(DesignerChanges.dashCheckTime, true);
+    public Timer dashTimer = new Timer(DesignerChanges.dashTime, true);
+
+    float damage;
+
+    Timer attackCooldown = new Timer(DesignerChanges.attackCooldown, true);
+    Timer jumpHoldTimer = new Timer(DesignerChanges.jumpHoldTime, true);
 
     EasyDraw damageDisplay = new EasyDraw(200, 200, false);
 
@@ -46,35 +53,42 @@ public class Character : AnimationSprite
     Attack basicAttack;
     Attack specialAttack;
 
-    public Character(int pPlayerId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, int rows = 4, int columns = 1, string imageFileName = "lemonster-stand.png") : base(imageFileName, rows, columns)
+    public Character(MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, string imageFileName = "banana-walk.png", int rows = 7, int columns = 1) : base(imageFileName, rows, columns)
     {
-        player_id = pPlayerId;
         myGame = pMyGame;
 
         basicAttack = pBasicAttack;
         specialAttack = pSpecialAttack;
 
-        max_move_speed = DesignerChanges.max_move_speed;
-        move_speed_up = DesignerChanges.move_speed_up;
-        move_slow_down = DesignerChanges.move_slow_down;
-        ground_slow_down = DesignerChanges.ground_slow_down;
-        jump_height = DesignerChanges.jump_height;
-        max_gravity = DesignerChanges.max_gravity;
+        max_move_speed = DesignerChanges.maxMoveSpeed;
+        move_speed_up = DesignerChanges.moveSpeedUp;
+        move_slow_down = DesignerChanges.moveSlowDown;
+        ground_slow_down = DesignerChanges.groundSlowDown;
+        jump_height = DesignerChanges.jumpHeight;
+        max_gravity = DesignerChanges.maxGravity;
         gravity = DesignerChanges.gravity;
 
-        attackCooldown = new Timer(DesignerChanges.attackCooldown, true);
 
-        singleAttackType = "normal";
-        specialAttackType = "boomerang";
-
-   
-        y = 600;
-        width = width * 2;
-        height = height * 2;
+        width = 100;
+        height = 100;
         y = 600;
 
+
+        SetCycle(0, 7, 20);
+    }
+
+    public void Spawn(int pPlayerId, Character pOther)
+    {
+
+        Console.WriteLine("wtf?");
+        playerId = pPlayerId;
+
+        x = playerId == 0 ? 300 : 1000;
+
+        other = pOther;
+        
         SetupUI();
-
+        game.AddChild(this);
     }
 
     void Update()
@@ -84,6 +98,7 @@ public class Character : AnimationSprite
             SetColor(1, 0, 0);
             return;
         }
+        Animate();
 
         Vector2 inputVector = MoveInputHandeling();
 
@@ -94,7 +109,7 @@ public class Character : AnimationSprite
             canAttack = true;
         }
 
-        if (Input.GetKeyDown(player_id == 0 ? Key.V : Key.COMMA) && (attackCooldown.cooldownDone() || canAttack))
+        if (Input.GetKeyDown(playerId == 0 ? Key.V : Key.COMMA) && (attackCooldown.cooldownDone() || canAttack))
         {
             Attack(directionVector);
         }
@@ -152,11 +167,11 @@ public class Character : AnimationSprite
     Vector2 MoveInputHandeling()
     {
         Vector2 inputVector = new Vector2();
-        if (Input.GetKey(player_id == 0 ? Key.A : Key.LEFT) && inputVector.x > -1)
+        if (Input.GetKey(playerId == 0 ? Key.A : Key.LEFT) && inputVector.x > -1)
         {
             inputVector.x -= 1;
         }
-        else if (Input.GetKey(player_id == 0 ? Key.D : Key.RIGHT) && inputVector.x < 1)
+        else if (Input.GetKey(playerId == 0 ? Key.D : Key.RIGHT) && inputVector.x < 1)
         {
             inputVector.x += 1;
         }
@@ -164,8 +179,10 @@ public class Character : AnimationSprite
         {
             inputVector.x = 0;
         }
+        
+        Dash();
 
-        if (Input.GetKeyDown(player_id == 0 ? Key.W : Key.RIGHT_SHIFT))
+        if (Input.GetKeyDown(playerId == 0 ? Key.W : Key.RIGHT_SHIFT))
         {
             inputVector.y = -1;
         }
@@ -177,24 +194,60 @@ public class Character : AnimationSprite
         return inputVector;
     }
 
+    void Dash()
+    {
+        if(Input.GetKeyDown(playerId == 0 ? Key.A : Key.LEFT) && dashTimer.cooldownDone())
+        {
+            if(dashCheckTimer.cooldownDone())
+            {
+                dashDir = -1;
+                dashCheckTimer.reset();
+            }
+            else if (dashDir == -1)
+            {
+                dashTimer.reset();
+            }
+        }
+        else if (Input.GetKeyDown(playerId == 0 ? Key.D : Key.RIGHT) && dashTimer.cooldownDone())
+        {
+            if (dashCheckTimer.cooldownDone())
+            {
+                dashDir = 1;
+                dashCheckTimer.reset();
+            }
+            else if (dashDir == 1)
+            {
+                dashTimer.reset();
+            }
+        }
+
+
+        if (!dashTimer.cooldownDone())
+        {
+            alpha = 0.5f;
+            moveVector.x = dashDir * DesignerChanges.dashSpeed;
+        }
+        else
+        {
+            alpha = 1;
+        }
+    }
+
     void Movement(Vector2 inputVector) { 
         if (inputVector.x == -1 && moveVector.x > -max_move_speed)
         {
             moveVector.x -= move_speed_up;
         }
-        if (inputVector.x == 1 && moveVector.x < max_move_speed)
+        else if (inputVector.x == 1 && moveVector.x < max_move_speed)
         {
             moveVector.x += move_speed_up;
         }
 
-        if (inputVector.y == -1 && grounded)
-        {
-            moveVector.y -= jump_height;
-            grounded = false;
-        }
+        JumpLogic(inputVector);
 
         if (grounded)
         {
+            canDoubleJump = true;
             SlowDown(inputVector, ground_slow_down);
         }
         else
@@ -203,7 +256,49 @@ public class Character : AnimationSprite
         }
     }
 
-    private void SlowDown(Vector2 inputVector, int slow_down)
+    private void JumpLogic(Vector2 inputVector)
+    {
+        if (inputVector.y == -1)
+        {
+            if (grounded)
+            {
+                canDoubleJump = true;
+                Jump();
+            }
+            else if (canDoubleJump)
+            {
+                canDoubleJump = false;
+                Jump();
+            }
+            else
+            {
+                jumpBuffer.reset();
+            }
+        }
+        else if (!jumpHoldTimer.cooldownDone())
+        {
+            moveVector.y -= DesignerChanges.jumpHoldHeight;
+        }
+
+        if(grounded && !jumpBuffer.cooldownDone())
+        {
+            Jump();
+        }
+
+        if(!Input.GetKey(playerId == 0 ? Key.W : Key.RIGHT_SHIFT))
+        {
+            jumpHoldTimer.forceCompleteCooldown();
+        }
+    }
+
+    private void Jump()
+    {
+        moveVector.y = -jump_height;
+        grounded = false;
+        jumpHoldTimer.reset();
+    }
+
+    private void SlowDown(Vector2 inputVector, float slow_down)
     {
         if(moveVector.x > slow_down && inputVector.x < 1)
         {
@@ -236,20 +331,18 @@ public class Character : AnimationSprite
         }
     }
 
-    public void getHit(int dmg, Vector2 direction)
+    public void getHit(float dmg, Vector2 direction)
     {
         damage += dmg;
         UpdateUI();
         grounded = false;
-        moveVector = direction.multiplyVector(direction, damage);
+        moveVector = moveVector.addVectors(moveVector, direction.multiplyVector(direction, damage));
     }
 
     private void SetupUI()
     {
         damageDisplay.SetOrigin(0, 0);
-        damageDisplay.SetXY(player_id == 0 ? 0 : game.width - damageDisplay.width, 0);
-
-        Console.WriteLine(damageDisplay.y);
+        damageDisplay.SetXY(playerId == 0 ? 0 : game.width - damageDisplay.width, 0);
 
         damageDisplay.TextAlign(CenterMode.Center, CenterMode.Center);
         damageDisplay.Fill(255);

@@ -28,7 +28,7 @@ namespace GXPEngine.Core
         {
             return new Vector2(a.x - b.x, a.y - b.y);
         }
-        public Vector2 multiplyVector(Vector2 a, int factor)
+        public Vector2 multiplyVector(Vector2 a, float factor)
         {
             return new Vector2(a.x * factor, a.y * factor);
         }
