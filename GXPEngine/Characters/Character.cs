@@ -15,6 +15,27 @@ using XmlReader;
 
 public class Character : AnimationSprite
 {
+    int idleStartFrame;
+    int idleFrames;
+    int idleFrameDelay;
+
+    int jumpFrame;
+
+    int runStartFrame;
+    int runFrames;
+    int runFramesDelay;
+
+    int attackStartFrame;
+    int attackFrames;
+    int attackFramesDelay;
+
+    int specialStartFrame;
+    int specialFrames;
+    int specialFramesDelay;
+
+    int deadFrame;
+    enum States {Idle, Jumping, Running, Attacking, Special, Dead}
+
     public int playerId = 0;
 
     public Character other;
@@ -40,13 +61,14 @@ public class Character : AnimationSprite
     protected bool isJumpHeld = false;
     protected Timer jumpBuffer = new Timer(DesignerChanges.jumpBuffer, true);
 
-    Timer dashCheckTimer = new Timer(DesignerChanges.dashCheckTime, true);
-    public Timer dashTimer = new Timer(DesignerChanges.dashTime, true);
+    Timer dashCheckTimer;
+    public Timer dashTimer;
+    int dashSpeed;
 
     float damage;
 
     Timer attackCooldown = new Timer(DesignerChanges.attackCooldown, true);
-    Timer jumpHoldTimer = new Timer(DesignerChanges.jumpHoldTime, true);
+    Timer jumpHoldTimer;
 
     EasyDraw damageDisplay = new EasyDraw(200, 200, false);
 
@@ -68,9 +90,36 @@ public class Character : AnimationSprite
         move_speed_up = self.moveSpeedUp;
         move_slow_down = self.moveSlowDown;
         ground_slow_down = self.groundSlowDown;
+
+        dashCheckTimer = new Timer(self.dashCheckTime, true);
+        dashTimer = new Timer(self.dashTime, true);
+        dashSpeed = self.dashSpeed;
+
         jump_height = self.jumpHeight;
+        jumpHoldTimer = new Timer(self.jumpHoldTime, true);
+
         max_gravity = self.maxGravity;
         gravity = self.gravity;
+
+        idleStartFrame = self.idleStartFrame;
+        idleFrames = self.idleFrames;
+        idleFrameDelay = self.idleFrameDelay;
+
+        jumpFrame = self.jumpFrame;
+
+        runStartFrame = self.runStartFrame;
+        runFrames = self.runFrames;
+        runFramesDelay = self.runFramesDelay;
+
+        attackStartFrame = self.attackStartFrame;
+        attackFrames = self.attackFrames;
+        attackFramesDelay = self.attackFramesDelay;
+
+        specialStartFrame = self.specialStartFrame;
+        specialFrames = self.specialFrames;
+        specialFramesDelay = self.specialFramesDelay;
+
+        deadFrame = self.deadFrame;
 
 
         width = 100;
@@ -84,7 +133,6 @@ public class Character : AnimationSprite
 
     public void Spawn(int pPlayerId, Character pOther)
     {
-
         playerId = pPlayerId;
 
         x = playerId == 0 ? 300 : 1000;
@@ -97,11 +145,6 @@ public class Character : AnimationSprite
 
     void Update()
     {
-        if (attacking)
-        {
-            SetColor(1, 0, 0);
-            return;
-        }
         Animate();
 
         Vector2 inputVector = MoveInputHandeling();
@@ -116,14 +159,6 @@ public class Character : AnimationSprite
         if (Input.GetKeyDown(playerId == 0 ? Key.V : Key.COMMA) && (attackCooldown.cooldownDone() || canAttack))
         {
             Attack(directionVector);
-        }
-        else if (canAttack)
-        {
-            SetColor(1, 1, 1);
-        }
-        else
-        {
-            SetColor(1, 0, 0);
         }
 
         if (!grounded)
@@ -229,7 +264,7 @@ public class Character : AnimationSprite
         if (!dashTimer.cooldownDone())
         {
             alpha = 0.5f;
-            moveVector.x = dashDir * DesignerChanges.dashSpeed;
+            moveVector.x = dashDir * dashSpeed;
         }
         else
         {
@@ -367,6 +402,11 @@ public class Character : AnimationSprite
         {
             myGame.ResetGame();
         }
+    }
+
+    void SetDashAnim()
+    {
+
     }
 }
 

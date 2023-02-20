@@ -8,16 +8,14 @@ using TiledMapParser;
 using System.Diagnostics.SymbolStore;
 using XmlReader;
 using System.Xml.Serialization;
+using System.Drawing.Imaging;
 
 public class MyGame : Game {
-    public int currentLevel;
+    private cardreader cardreader = new cardreader();
+    public bool isCharacterSelect = true;
 
-
-    private Character banana;
-    private Character lemon;
-
-    private Character playerOne;
-    private Character playerTwo;
+    private Character playerOne = null;
+    private Character playerTwo = null;
 
     private CharacterSheet characterData;
     private AttackSheet attackData;
@@ -32,16 +30,55 @@ public class MyGame : Game {
 
     void StartGame()
     {
-        LoadCharackters();
-
-        banana.Spawn(0, lemon);
-        lemon.Spawn(1, banana);
+        isCharacterSelect = true;
     }
 
-    void LoadCharackters()
+    void Update()
     {
-        banana = new Character(characterData, 0, this, new Attack(), new Boomerang());
-        lemon = new Character(characterData, 0, this, new Boomerang(), new Attack());
+        if (isCharacterSelect)
+            characterSelect();
+    }
+
+    void characterSelect()
+    {
+        if(playerOne != null && playerTwo != null)
+        {
+            playerOne.Spawn(0, playerTwo);
+            playerTwo.Spawn(1, playerOne);
+
+            isCharacterSelect = false;
+        }
+
+        int id = cardreader.readcard();
+        if (id == -1)
+            return;
+
+        id -= 1;
+
+        if (playerOne == null)
+        {
+            playerOne = LoadCharacters(id, playerOne);
+        }
+        else if (playerTwo == null)
+        {
+            playerTwo = LoadCharacters(id, playerTwo);
+        }
+    }
+
+
+    Character LoadCharacters(int id, Character player)
+    {
+        switch (id)
+        {
+            case 0:
+                player = new Character(characterData, id, this, new Attack(), new Boomerang());
+                break;
+            case 1:
+                player = new Character(characterData, id, this, new Boomerang(), new Attack());
+                break;
+        }
+
+        return player;
     }
 
 
@@ -49,15 +86,14 @@ public class MyGame : Game {
     public void ResetGame()
     {
         DestroyAll();
+
+        playerOne = null;
+        playerTwo = null;
+
         StartGame();
     }
 
     // For every game object, Update is called every frame, by the engine:
-    void Update()
-    {
-
-    }
-
     static void Main()                          // Main() is the first method that's called when the program is run
 	{
 		new MyGame().Start();                   // Create a "MyGame" and start it

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<attackList>
+	<attack name="Attack"
+		windupTime="200"
+		time="200"
+		cooldown="1000"
+	    damage="3"
+		xKnockback="2"
+		yKnockback="2"
+		iMillis="300">
+	</attack>
+	<attack name="Boomerang"
+		windupTime="200"
+		time="200"
+		cooldown="1000"
+	    damage="1"
+		xKnockback="0.15"
+		yKnockback="0.15"
+		iMillis="300">
+	</attack>
+</attackList>

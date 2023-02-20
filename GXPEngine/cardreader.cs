@@ -12,8 +12,8 @@ public class cardreader
     public int readcard()
     {
         int characterID = -1;
-        if (Input.GetKeyDown(Key.EQUALS))
-        {
+       // if (Input.GetKeyDown(Key.EQUALS))
+        //{
 
             for (var i = 0; i < 10; i++)
             {
@@ -29,7 +29,7 @@ public class cardreader
             }
             Console.WriteLine(characterID.ToString());
 
-        }
+       // }
 
         return (characterID);
     }

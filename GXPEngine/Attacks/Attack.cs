@@ -16,6 +16,7 @@ public class Attack : Sprite
     protected Timer attackTimer;
     protected Character caster;
 
+    Timer windUp = new Timer(200, false);
     Timer iFrames = new Timer(300, true);
     protected bool canHit = true;
 

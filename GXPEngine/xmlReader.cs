@@ -73,7 +73,7 @@ namespace XmlReader
         [XmlAttribute("dashTime")]
         public int dashTime;
         [XmlAttribute("dashSpeed")]
-        public float dashSpeed;
+        public int dashSpeed;
 
         [XmlAttribute("jumpHeight")]
         public float jumpHeight;
@@ -88,6 +88,40 @@ namespace XmlReader
         public int maxGravity;
         [XmlAttribute("gravity")]
         public float gravity;
+
+        [XmlAttribute("idleStartFrame")]
+        public int idleStartFrame;
+        [XmlAttribute("idleFrames")]
+        public int idleFrames;
+        [XmlAttribute("idleFrameDelay")]
+        public int idleFrameDelay;
+
+        [XmlAttribute("jumpFrame")]
+        public int jumpFrame;
+
+        [XmlAttribute("runStartFrame")]
+        public int runStartFrame;
+        [XmlAttribute("runFrames")]
+        public int runFrames;
+        [XmlAttribute("runFramesDelay")]
+        public int runFramesDelay;
+
+        [XmlAttribute("attackStartFrame")]
+        public int attackStartFrame;
+        [XmlAttribute("attackFrames")]
+        public int attackFrames;
+        [XmlAttribute("attackFramesDelay")]
+        public int attackFramesDelay;
+
+        [XmlAttribute("specialStartFrame")]
+        public int specialStartFrame;
+        [XmlAttribute("specialFrames")]
+        public int specialFrames;
+        [XmlAttribute("specialFramesDelay")]
+        public int specialFramesDelay;
+
+        [XmlAttribute("deadFrame")]
+        public int deadFrame;
 
     }
 

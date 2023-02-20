@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<characterList>
+	<character name="Banana" 
+		maxMoveSpeed="15"
+		moveSpeedUp="1"
+		moveSlowDown="1"
+		groundSlowDown="2"
+			   
+		dashCheckTime="250"
+		dashTime="100"
+		dashSpeed="30"
+			   
+		jumpHeight="10"
+		jumpHoldTime="150"
+		jumpHoldHeight="1"
+		jumpBuffer="300"
+			   
+		maxGravity="40"
+		gravity="0.5"
+			   
+		idleStartFrame=""
+		idleFrames=""
+		idleFrameDelay=""
+
+		jumpFrame=""
+
+		runStartFrame=""
+		runFrames=""
+		runFramesDelay=""
+
+		attackStartFrame=""
+		attackFrames=""
+		attackFramesDelay=""
+
+		specialStartFrame=""
+		specialFrames=""
+		specialFramesDelay=""
+
+		deadFrame="">
+	</character>
+	<character name="Lemon"
+		maxMoveSpeed="15"
+		moveSpeedUp="1"
+		moveSlowDown="1"
+		groundSlowDown="2"
+			   
+		dashCheckTime="250"
+		dashTime="80"
+		dashSpeed="40"
+			   
+		jumpHeight="10"
+		jumpHoldTime="150"
+		jumpHoldHeight="1"
+		jumpBuffer="300"
+			   
+		maxGravity="40"
+		gravity="0.5"
+			   
+		idleStartFrame=""
+		idleFrames=""
+		idleFrameDelay=""
+
+		jumpFrame=""
+
+		runStartFrame=""
+		runFrames=""
+		runFramesDelay=""
+
+		attackStartFrame=""
+		attackFrames=""
+		attackFramesDelay=""
+
+		specialStartFrame=""
+		specialFrames=""
+		specialFramesDelay=""
+
+		deadFrame="">
+	</character>
+</characterList>
+

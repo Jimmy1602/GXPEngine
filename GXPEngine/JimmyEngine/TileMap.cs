@@ -25,8 +25,7 @@ class TileMap : GameObject {
 
     public TileMap(int PtileSize, MyGame myGame){
         tileSize = PtileSize;
-        Console.WriteLine(String.Format("Level{0}.tmx", myGame.currentLevel));
-        Map levelData = MapParser.ReadMap(String.Format("Level{0}.tmx", myGame.currentLevel));
+        //Map levelData = MapParser.ReadMap(String.Format("Level{0}.tmx", myGame.currentLevel));
     }
 
     void Update(){
