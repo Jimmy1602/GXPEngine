@@ -13,29 +13,8 @@ using GXPEngine.Core;
 using TiledMapParser;
 using XmlReader;
 
-public class Character : AnimationSprite
+public class Character : Sprite
 {
-    int idleStartFrame;
-    int idleFrames;
-    int idleFrameDelay;
-
-    int jumpFrame;
-
-    int runStartFrame;
-    int runFrames;
-    int runFramesDelay;
-
-    int attackStartFrame;
-    int attackFrames;
-    int attackFramesDelay;
-
-    int specialStartFrame;
-    int specialFrames;
-    int specialFramesDelay;
-
-    int deadFrame;
-    enum States {Idle, Jumping, Running, Attacking, Special, Dead}
-
     public int playerId = 0;
 
     public Character other;
@@ -54,6 +33,7 @@ public class Character : AnimationSprite
 
     bool grounded = true;
     public bool attacking = false;
+    public bool specialing = false;
     public bool canAttack = true;
     private int dashDir = 0;
 
@@ -74,10 +54,12 @@ public class Character : AnimationSprite
 
     MyGame myGame;
 
+    VisibleSprite visibleSprite;
+
     Attack basicAttack;
     Attack specialAttack;
 
-    public Character(CharacterSheet characterdata, int characterId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, string imageFileName = "banana-walk.png", int rows = 7, int columns = 1) : base(imageFileName, rows, columns)
+    public Character(CharacterSheet characterdata, int characterId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, string imageFileName, int columns, int rows) : base("CharacterRect.png", false, true, false)
     {
         myGame = pMyGame;
 
@@ -86,6 +68,8 @@ public class Character : AnimationSprite
 
 
         CharacterProperties self = characterdata.characters[characterId];
+        visibleSprite = new VisibleSprite(self, imageFileName, columns, rows);
+        AddChild(visibleSprite);
         max_move_speed = self.maxMoveSpeed;
         move_speed_up = self.moveSpeedUp;
         move_slow_down = self.moveSlowDown;
@@ -101,25 +85,7 @@ public class Character : AnimationSprite
         max_gravity = self.maxGravity;
         gravity = self.gravity;
 
-        idleStartFrame = self.idleStartFrame;
-        idleFrames = self.idleFrames;
-        idleFrameDelay = self.idleFrameDelay;
-
-        jumpFrame = self.jumpFrame;
-
-        runStartFrame = self.runStartFrame;
-        runFrames = self.runFrames;
-        runFramesDelay = self.runFramesDelay;
-
-        attackStartFrame = self.attackStartFrame;
-        attackFrames = self.attackFrames;
-        attackFramesDelay = self.attackFramesDelay;
-
-        specialStartFrame = self.specialStartFrame;
-        specialFrames = self.specialFrames;
-        specialFramesDelay = self.specialFramesDelay;
-
-        deadFrame = self.deadFrame;
+        
 
 
         width = 100;
@@ -128,7 +94,6 @@ public class Character : AnimationSprite
 
 
 
-        SetCycle(0, 7, 20);
     }
 
     public void Spawn(int pPlayerId, Character pOther)
@@ -145,8 +110,6 @@ public class Character : AnimationSprite
 
     void Update()
     {
-        Animate();
-
         Vector2 inputVector = MoveInputHandeling();
 
         Movement(inputVector);
@@ -174,13 +137,16 @@ public class Character : AnimationSprite
 
             if (inputVector.x < 0)
             {
-                Mirror(true, false);
+                visibleSprite.Mirror(true, false);
             }
             else
             {
-                Mirror(false, false);
+                visibleSprite.Mirror(false, false);
             }
         }
+
+        animationLogic();
+        visibleSprite.Animate();
 
         Die();
     }
@@ -404,8 +370,29 @@ public class Character : AnimationSprite
         }
     }
 
-    void SetDashAnim()
+
+    private void animationLogic()
     {
+        if (!attacking && !specialing && moveVector.x == 0 && grounded)
+        {
+            visibleSprite.SetIdleAnim();
+        }
+        else if (grounded && !attacking && !specialing)
+        {
+            visibleSprite.SetRunAnim();
+        }
+        else if ((!grounded || !dashTimer.cooldownDone()) && !attacking && !specialing)
+        {
+            visibleSprite.SetJumpAnim();
+        }
+        else if (specialing)
+        {
+            visibleSprite.SetSpecialAnim();
+        }
+        else if (attacking)
+        {
+            visibleSprite.SetAttackAnim();
+        }
 
     }
 }
