@@ -13,6 +13,7 @@
 		time="200"
 		cooldown="1000"
 	    damage="1"
+		xKnockback="0.15"
 		yKnockback="0.15"
 		iMillis="300">
 	</attack>
