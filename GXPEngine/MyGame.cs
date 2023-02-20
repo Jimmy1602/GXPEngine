@@ -53,7 +53,8 @@ public class MyGame : Game {
             isCharacterSelect = false;
         }
 
-        int id = cardreader.readcard();
+        bool selectforplayertwo = (playerOne != null && playerTwo == null);
+        int id = cardreader.readcard(selectforplayertwo);
         if (id == -1)
             return;
 
@@ -80,9 +81,12 @@ public class MyGame : Game {
         switch (id)
         {
             case 0:
-                player = new Character(characterData, id, this, new Attack(), new Boomerang(), "lemon_sprite_sheet.png", 7, 6);
+                player = new Character(characterData, id, this, new Attack(), new Attack(), "lemon_sprite_sheet.png", 7, 6);
                 break;
             case 1:
+                player = new Character(characterData, id, this, new Attack(), new Boomerang(), "lemon_sprite_sheet.png", 7, 6);
+                break;
+            case 2:
                 player = new Character(characterData, id, this, new Boomerang(), new Attack(), "lemon_sprite_sheet.png", 7, 6);
                 break;
         }
