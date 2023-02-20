@@ -57,15 +57,20 @@ public class MyGame : Game {
         if (id == -1)
             return;
 
-        id -= 1;
 
         if (playerOne == null)
         {
+
             playerOne = LoadCharacters(id, playerOne);
+            Console.WriteLine("Player One selected: " + id.ToString());
+
         }
         else if (playerTwo == null)
         {
+            
             playerTwo = LoadCharacters(id, playerTwo);
+            Console.WriteLine("Player Two selected: " + id.ToString());
+
         }
     }
 
