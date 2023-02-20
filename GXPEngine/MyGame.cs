@@ -26,7 +26,7 @@ public class MyGame : Game {
         background.width = width; background.height = height;
         AddChild(background);
 
-        characterData = xmlReader.ReadCharacterMap(String.Format("Characters.xml"));
+        characterData = xmlReader.ReadCharacterMap("Characters.xml");
         attackData = xmlReader.ReadAttackMap("Attacks.xml");
         
         StartGame();

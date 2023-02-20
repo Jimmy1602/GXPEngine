@@ -12,10 +12,11 @@ namespace XmlReader
 {
     public class xmlReader
     {
-        static XmlSerializer serial = new XmlSerializer(typeof(CharacterSheet));
+        static XmlSerializer serial;
 
         public static CharacterSheet ReadCharacterMap(string filename)
         {
+            serial = new XmlSerializer(typeof(CharacterSheet));
             TextReader reader = new StreamReader(filename);
             CharacterSheet myMap = serial.Deserialize(reader) as CharacterSheet;
             reader.Close();

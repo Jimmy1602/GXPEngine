@@ -91,9 +91,6 @@ public class Character : Sprite
         width = 100;
         height = 100;
         y = 600;
-
-
-
     }
 
     public void Spawn(int pPlayerId, Character pOther)
@@ -164,9 +161,7 @@ public class Character : Sprite
             attack = specialAttack;
         }
 
-        attackCooldown.reset();
-        canAttack = false;
-        attack.Spawn(_mirrorX ? -1 : 1, this);
+        attack.Spawn(visibleSprite.isMirrored() ? -1 : 1, this);
     }
 
     Vector2 MoveInputHandeling()

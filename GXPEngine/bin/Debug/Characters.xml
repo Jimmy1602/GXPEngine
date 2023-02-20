@@ -28,11 +28,13 @@
 		runFrames="1"
 		runFramesDelay="1"
 
-		attackStartFrame="1"
-		attackFrames="1"
-		attackFramesDelay="1"
+		attackStartFrame="14"
+		attackHitFrame="17"
+		attackFrames="5"
+		attackFramesDelay="30"
 
 		specialStartFrame="1"
+		specialHitFrame="1"
 		specialFrames="1"
 		specialFramesDelay="1"
 
@@ -67,10 +69,12 @@
 		runFramesDelay="1"
 
 		attackStartFrame="1"
+		attackHitFrame="17"
 		attackFrames="1"
 		attackFramesDelay="1"
 
 		specialStartFrame="1"
+		specialHitFrame="1"
 		specialFrames="1"
 		specialFramesDelay="1"
 

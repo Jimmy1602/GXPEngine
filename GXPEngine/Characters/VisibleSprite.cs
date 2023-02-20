@@ -33,6 +33,9 @@ class VisibleSprite : AnimationSprite
     int deadFrame;
 
     int targetFrame;
+    int startFrame;
+
+    bool looped = false;
     public bool animDone { get; private set; } = false;
 
 
@@ -62,11 +65,20 @@ class VisibleSprite : AnimationSprite
         deadFrame = self.deadFrame;
     }
 
+    public bool isMirrored()
+    {
+        return _mirrorX;
+    }
+
     void Update()
     {
         if(currentFrame == targetFrame - 1)
         {
-            Console.WriteLine("fuck ywaaaa");
+            looped = true;
+        }
+        if (looped && currentFrame == startFrame)
+        {
+            animDone = true;
         }
     }
 
@@ -76,7 +88,6 @@ class VisibleSprite : AnimationSprite
         {
             currentAnim = "idle";
             SetCycle(idleStartFrame, idleFrames, idleFrameDelay);
-            targetFrame = idleStartFrame + idleFrames;
         }
     }
     public void SetRunAnim()
@@ -101,6 +112,11 @@ class VisibleSprite : AnimationSprite
         {
             currentAnim = "attack";
             SetCycle(attackStartFrame, attackFrames, attackFramesDelay);
+            targetFrame = attackStartFrame + attackFrames;
+            startFrame = attackStartFrame;
+
+            looped = false;
+            animDone = false;
         }
     }
     public void SetSpecialAnim()
@@ -109,6 +125,11 @@ class VisibleSprite : AnimationSprite
         {
             currentAnim = "special";
             SetCycle(specialStartFrame, specialFrames, specialFramesDelay);
+            targetFrame = specialStartFrame + specialFrames;
+            startFrame = specialStartFrame;
+
+            looped = false;
+            animDone = false;
         }
     }
     public void SetDeadAnim()
