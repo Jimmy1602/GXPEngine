@@ -116,7 +116,7 @@ public class Character : Sprite
             canAttack = true;
         }
 
-        if (Input.GetKeyDown(playerId == 0 ? Key.V : Key.COMMA) && (attackCooldown.cooldownDone() || canAttack))
+        if (Input.GetKeyDown(playerId == 0 ? Key.V : Key.P) && (attackCooldown.cooldownDone() || canAttack))
         {
             Attack(directionVector);
         }
@@ -167,11 +167,11 @@ public class Character : Sprite
     Vector2 MoveInputHandeling()
     {
         Vector2 inputVector = new Vector2();
-        if (Input.GetKey(playerId == 0 ? Key.A : Key.LEFT) && inputVector.x > -1)
+        if (Input.GetKey(playerId == 0 ? Key.A : Key.J) && inputVector.x > -1)
         {
             inputVector.x -= 1;
         }
-        else if (Input.GetKey(playerId == 0 ? Key.D : Key.RIGHT) && inputVector.x < 1)
+        else if (Input.GetKey(playerId == 0 ? Key.D : Key.L) && inputVector.x < 1)
         {
             inputVector.x += 1;
         }
@@ -182,7 +182,7 @@ public class Character : Sprite
         
         Dash();
 
-        if (Input.GetKeyDown(playerId == 0 ? Key.W : Key.RIGHT_SHIFT))
+        if (Input.GetKeyDown(playerId == 0 ? Key.W : Key.I))
         {
             inputVector.y = -1;
         }
@@ -196,7 +196,7 @@ public class Character : Sprite
 
     void Dash()
     {
-        if(Input.GetKeyDown(playerId == 0 ? Key.A : Key.LEFT) && dashTimer.cooldownDone())
+        if(Input.GetKeyDown(playerId == 0 ? Key.A : Key.J) && dashTimer.cooldownDone())
         {
             if(dashCheckTimer.cooldownDone())
             {
@@ -208,7 +208,7 @@ public class Character : Sprite
                 dashTimer.reset();
             }
         }
-        else if (Input.GetKeyDown(playerId == 0 ? Key.D : Key.RIGHT) && dashTimer.cooldownDone())
+        else if (Input.GetKeyDown(playerId == 0 ? Key.D : Key.L) && dashTimer.cooldownDone())
         {
             if (dashCheckTimer.cooldownDone())
             {
@@ -285,7 +285,7 @@ public class Character : Sprite
             Jump();
         }
 
-        if(!Input.GetKey(playerId == 0 ? Key.W : Key.RIGHT_SHIFT))
+        if(!Input.GetKey(playerId == 0 ? Key.W : Key.I))
         {
             jumpHoldTimer.forceCompleteCooldown();
         }

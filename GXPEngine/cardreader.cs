@@ -9,12 +9,15 @@ using GXPEngine.Core;
 
 public class cardreader
 {
-    public int readcard()
+    public int readcard(bool selectingforplayer2)
     {
         int characterID = -1;
        // if (Input.GetKeyDown(Key.EQUALS))
         //{
-
+            // if you have no character
+            if((Input.GetKeyDown(Key.E) && !selectingforplayer2) || (Input.GetKeyDown(Key.O) && selectingforplayer2)){ return (0); };
+            
+            // get character ID
             for (var i = 0; i < 10; i++)
             {
                 int keynumber = 48 + i;

@@ -66,6 +66,44 @@
 		runFrames="1"
 		runFramesDelay="1"
 
+		attackStartFrame="1"
+		attackFrames="1"
+		attackFramesDelay="1"
+
+		specialStartFrame="1"
+		specialFrames="1"
+		specialFramesDelay="1"
+
+		deadFrame="1">
+	</character>
+	<character name="Banana" 
+		maxMoveSpeed="15"
+		moveSpeedUp="1"
+		moveSlowDown="1"
+		groundSlowDown="2"
+			   
+		dashCheckTime="250"
+		dashTime="100"
+		dashSpeed="30"
+			   
+		jumpHeight="10"
+		jumpHoldTime="150"
+		jumpHoldHeight="1"
+		jumpBuffer="300"
+			   
+		maxGravity="40"
+		gravity="0.5"
+			   
+		idleStartFrame="0"
+		idleFrames="4"
+		idleFrameDelay="50"
+
+		jumpFrame="1"
+
+		runStartFrame="1"
+		runFrames="1"
+		runFramesDelay="1"
+
 		attackStartFrame="14"
 		attackHitFrame="17"
 		attackFrames="5"
