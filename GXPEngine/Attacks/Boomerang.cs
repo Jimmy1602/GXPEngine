@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using GXPEngine;
 using GXPEngine.Core;
+using XmlReader;
 
 public class Boomerang : Attack
 {
@@ -14,9 +15,9 @@ public class Boomerang : Attack
     private Vector2 moveVector = new Vector2();
     private int speed;
 
-    
+    int cooldown = DesignerChanges.boomerangCooldown;
 
-    public Boomerang(int attackTime) : base(attackTime)
+    public Boomerang() : base()
     {
         speed = DesignerChanges.boomerangSpeed;
     }

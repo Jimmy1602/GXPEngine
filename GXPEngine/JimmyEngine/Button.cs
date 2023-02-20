@@ -33,7 +33,6 @@ class Button : Sprite
         if (visible && justTurnedVisible && Input.GetMouseButtonUp(0))
         {
             justTurnedVisible = false;
-            Console.WriteLine(justTurnedVisible);
         }
     }
 

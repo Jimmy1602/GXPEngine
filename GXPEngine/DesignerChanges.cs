@@ -35,6 +35,7 @@ public static class DesignerChanges
     public static int boomerangFloatTime = 500;
     public static int boomerangSpeed = 10;
     public static int boomerangBackSpeed = 20;
+    public static int boomerangCooldown = 1002;
     public static float boomerangDamage = 1;
     public static float boomerangKnockbackX = 0.15f;
     public static float boomerangKnockbackY = 0.15f;

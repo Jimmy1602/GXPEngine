@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 using GXPEngine;
 using GXPEngine.Core;
+using TiledMapParser;
+using XmlReader;
 
 public class Character : AnimationSprite
 {
@@ -53,25 +55,28 @@ public class Character : AnimationSprite
     Attack basicAttack;
     Attack specialAttack;
 
-    public Character(MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, string imageFileName = "banana-walk.png", int rows = 7, int columns = 1) : base(imageFileName, rows, columns)
+    public Character(CharacterSheet characterdata, int characterId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, string imageFileName = "banana-walk.png", int rows = 7, int columns = 1) : base(imageFileName, rows, columns)
     {
         myGame = pMyGame;
 
         basicAttack = pBasicAttack;
         specialAttack = pSpecialAttack;
 
-        max_move_speed = DesignerChanges.maxMoveSpeed;
-        move_speed_up = DesignerChanges.moveSpeedUp;
-        move_slow_down = DesignerChanges.moveSlowDown;
-        ground_slow_down = DesignerChanges.groundSlowDown;
-        jump_height = DesignerChanges.jumpHeight;
-        max_gravity = DesignerChanges.maxGravity;
-        gravity = DesignerChanges.gravity;
+
+        CharacterProperties self = characterdata.characters[characterId];
+        max_move_speed = self.maxMoveSpeed;
+        move_speed_up = self.moveSpeedUp;
+        move_slow_down = self.moveSlowDown;
+        ground_slow_down = self.groundSlowDown;
+        jump_height = self.jumpHeight;
+        max_gravity = self.maxGravity;
+        gravity = self.gravity;
 
 
         width = 100;
         height = 100;
         y = 600;
+
 
 
         SetCycle(0, 7, 20);
@@ -80,7 +85,6 @@ public class Character : AnimationSprite
     public void Spawn(int pPlayerId, Character pOther)
     {
 
-        Console.WriteLine("wtf?");
         playerId = pPlayerId;
 
         x = playerId == 0 ? 300 : 1000;

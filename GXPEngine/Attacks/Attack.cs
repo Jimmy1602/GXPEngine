@@ -5,9 +5,10 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Xml.Serialization;
 using GXPEngine;
 using GXPEngine.Core;
+using XmlReader;
 
 public class Attack : Sprite
 {
@@ -18,9 +19,11 @@ public class Attack : Sprite
     Timer iFrames = new Timer(300, true);
     protected bool canHit = true;
 
-    public Attack(int attackTime, String imageFilename = "circle.png") : base(imageFilename)
+    int cooldown = DesignerChanges.attackCooldown;
+
+    public Attack(String imageFilename = "circle.png") : base(imageFilename)
     {
-        attackTimer = new Timer(attackTime);
+        attackTimer = new Timer(200);
     }
 
     public virtual void Spawn(int direction, Character Pcaster)
@@ -84,6 +87,11 @@ public class Attack : Sprite
     {
         target.getHit(DesignerChanges.attackDamage, new Vector2(xOffSet/100 * DesignerChanges.attackKnockbackX, -DesignerChanges.attackKnockbackY));
         
+    }
+
+    public int getCooldown()
+    {
+        return cooldown;
     }
 
     protected virtual void Die()

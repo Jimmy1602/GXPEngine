@@ -6,6 +6,8 @@ using GXPEngine.Core;
 using System.Drawing.Text;
 using TiledMapParser;
 using System.Diagnostics.SymbolStore;
+using XmlReader;
+using System.Xml.Serialization;
 
 public class MyGame : Game {
     public int currentLevel;
@@ -17,10 +19,16 @@ public class MyGame : Game {
     private Character playerOne;
     private Character playerTwo;
 
+    private CharacterSheet characterData;
+    private AttackSheet attackData;
+
     public MyGame() : base(1366, 768, false, true, 600, 400)
 	{
+        characterData = xmlReader.ReadCharacterMap(String.Format("Characters.xml"));
+        //attackData = xmlReader.ReadAttackMap(String.Format("Attacks.xml"));
+        
         StartGame();
-	}
+    }
 
     void StartGame()
     {
@@ -32,8 +40,8 @@ public class MyGame : Game {
 
     void LoadCharackters()
     {
-        banana = new Character(this, new Attack(DesignerChanges.attackTime), new Boomerang(DesignerChanges.boomerangFloatTime));
-        lemon = new Character(this, new Boomerang(DesignerChanges.boomerangFloatTime), new Attack(DesignerChanges.attackTime));
+        banana = new Character(characterData, 0, this, new Attack(), new Boomerang());
+        lemon = new Character(characterData, 0, this, new Boomerang(), new Attack());
     }
 
 
