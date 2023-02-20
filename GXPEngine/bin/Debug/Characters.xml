@@ -18,25 +18,25 @@
 		maxGravity="40"
 		gravity="0.5"
 			   
-		idleStartFrame=""
-		idleFrames=""
-		idleFrameDelay=""
+		idleStartFrame="0"
+		idleFrames="4"
+		idleFrameDelay="50"
 
-		jumpFrame=""
+		jumpFrame="1"
 
-		runStartFrame=""
-		runFrames=""
-		runFramesDelay=""
+		runStartFrame="1"
+		runFrames="1"
+		runFramesDelay="1"
 
-		attackStartFrame=""
-		attackFrames=""
-		attackFramesDelay=""
+		attackStartFrame="1"
+		attackFrames="1"
+		attackFramesDelay="1"
 
-		specialStartFrame=""
-		specialFrames=""
-		specialFramesDelay=""
+		specialStartFrame="1"
+		specialFrames="1"
+		specialFramesDelay="1"
 
-		deadFrame="">
+		deadFrame="1">
 	</character>
 	<character name="Lemon"
 		maxMoveSpeed="15"
@@ -56,25 +56,25 @@
 		maxGravity="40"
 		gravity="0.5"
 			   
-		idleStartFrame=""
-		idleFrames=""
-		idleFrameDelay=""
+		idleStartFrame="0"
+		idleFrames="4"
+		idleFrameDelay="50"
 
-		jumpFrame=""
+		jumpFrame="1"
 
-		runStartFrame=""
-		runFrames=""
-		runFramesDelay=""
+		runStartFrame="1"
+		runFrames="1"
+		runFramesDelay="1"
 
-		attackStartFrame=""
-		attackFrames=""
-		attackFramesDelay=""
+		attackStartFrame="1"
+		attackFrames="1"
+		attackFramesDelay="1"
 
-		specialStartFrame=""
-		specialFrames=""
-		specialFramesDelay=""
+		specialStartFrame="1"
+		specialFrames="1"
+		specialFramesDelay="1"
 
-		deadFrame="">
+		deadFrame="1">
 	</character>
 </characterList>
 

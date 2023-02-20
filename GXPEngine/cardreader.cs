@@ -27,7 +27,6 @@ public class cardreader
                     characterID += 10;
                 }
             }
-            Console.WriteLine(characterID.ToString());
 
        // }
 

@@ -22,8 +22,12 @@ public class MyGame : Game {
 
     public MyGame() : base(1366, 768, false, true, 600, 400)
 	{
+        Sprite background = new Sprite("CharacterRectWhite.png", false, false, false);
+        background.width = width; background.height = height;
+        AddChild(background);
+
         characterData = xmlReader.ReadCharacterMap(String.Format("Characters.xml"));
-        //attackData = xmlReader.ReadAttackMap(String.Format("Attacks.xml"));
+        attackData = xmlReader.ReadAttackMap("Attacks.xml");
         
         StartGame();
     }
@@ -71,10 +75,10 @@ public class MyGame : Game {
         switch (id)
         {
             case 0:
-                player = new Character(characterData, id, this, new Attack(), new Boomerang());
+                player = new Character(characterData, id, this, new Attack(), new Boomerang(), "lemon_sprite_sheet.png", 7, 6);
                 break;
             case 1:
-                player = new Character(characterData, id, this, new Boomerang(), new Attack());
+                player = new Character(characterData, id, this, new Boomerang(), new Attack(), "lemon_sprite_sheet.png", 7, 6);
                 break;
         }
 

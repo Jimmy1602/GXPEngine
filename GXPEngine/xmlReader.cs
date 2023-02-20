@@ -29,6 +29,7 @@ namespace XmlReader
 
         public static AttackSheet ReadAttackMap(string filename)
         {
+            serial = new XmlSerializer(typeof(AttackSheet));
             TextReader reader = new StreamReader(filename);
             AttackSheet myMap = serial.Deserialize(reader) as AttackSheet;
             reader.Close();
@@ -94,7 +95,7 @@ namespace XmlReader
         [XmlAttribute("idleFrames")]
         public int idleFrames;
         [XmlAttribute("idleFrameDelay")]
-        public int idleFrameDelay;
+        public byte idleFrameDelay;
 
         [XmlAttribute("jumpFrame")]
         public int jumpFrame;
@@ -104,21 +105,21 @@ namespace XmlReader
         [XmlAttribute("runFrames")]
         public int runFrames;
         [XmlAttribute("runFramesDelay")]
-        public int runFramesDelay;
+        public byte runFramesDelay;
 
         [XmlAttribute("attackStartFrame")]
         public int attackStartFrame;
         [XmlAttribute("attackFrames")]
         public int attackFrames;
         [XmlAttribute("attackFramesDelay")]
-        public int attackFramesDelay;
+        public byte attackFramesDelay;
 
         [XmlAttribute("specialStartFrame")]
         public int specialStartFrame;
         [XmlAttribute("specialFrames")]
         public int specialFrames;
         [XmlAttribute("specialFramesDelay")]
-        public int specialFramesDelay;
+        public byte specialFramesDelay;
 
         [XmlAttribute("deadFrame")]
         public int deadFrame;
@@ -132,11 +133,11 @@ namespace XmlReader
         public AttackProperties[] attacks;
     }
 
-    [XmlRootAttribute("attack")]
+    [XmlRoot("attack")]
     public class AttackProperties : PropertyContainer
     {
         [XmlAttribute("name")]
-        public string name;
+        public string name;  // <3
 
         [XmlAttribute("windupTime")]
         public int windupTime;
