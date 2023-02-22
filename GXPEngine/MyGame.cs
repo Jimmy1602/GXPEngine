@@ -54,6 +54,7 @@ public class MyGame : Game {
 
     void Update()
     {
+        Console.WriteLine(Utils.frameRate);
         if (isCharacterSelect)
         {
             characterSelect();
