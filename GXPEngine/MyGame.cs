@@ -45,7 +45,7 @@ public class MyGame : Game {
 
     void characterSelect()
     {
-        if(playerOne != null && playerTwo != null)
+        if (playerOne != null && playerTwo != null)
         {
             playerOne.Spawn(0, playerTwo);
             playerTwo.Spawn(1, playerOne);
@@ -54,6 +54,9 @@ public class MyGame : Game {
         }
 
         bool selectforplayertwo = (playerOne != null && playerTwo == null);
+
+
+
         int id = cardreader.readcard(selectforplayertwo);
         if (id == -1)
             return;
@@ -61,7 +64,6 @@ public class MyGame : Game {
 
         if (playerOne == null)
         {
-
             playerOne = LoadCharacters(id, playerOne);
             Console.WriteLine("Player One selected: " + id.ToString());
 
