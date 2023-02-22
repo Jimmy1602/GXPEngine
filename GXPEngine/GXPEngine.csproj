@@ -110,6 +110,7 @@
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
     <Compile Include="Characters\Character.cs" />
+    <Compile Include="Plattform.cs" />
     <Compile Include="xmlReader.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <characterList>
-	<character name="Unknown" 
+	<character name="Apple" 
 		maxMoveSpeed="15"
 		moveSpeedUp="1"
 		moveSlowDown="1"
@@ -40,7 +40,7 @@
 
 		deadFrame="1">
 	</character>
-	<character name="Orange" 
+	<character name="Banana" 
 		maxMoveSpeed="10"
 		moveSpeedUp="0.3"
 		moveSlowDown="1"
@@ -80,7 +80,7 @@
 
 		deadFrame="1">
 	</character>
-	<character name="Banana" 
+	<character name="Lemon" 
 		maxMoveSpeed="15"
 		moveSpeedUp="1"
 		moveSlowDown="1"
@@ -120,7 +120,7 @@
 
 		deadFrame="1">
 	</character>
-	<character name="Lemon"
+	<character name="Tomato"
 		maxMoveSpeed="15"
 		moveSpeedUp="1"
 		moveSlowDown="1"
@@ -160,4 +160,158 @@
 
 		deadFrame="1">
 	</character>
+	<character name="Orange"
+		maxMoveSpeed="15"
+		moveSpeedUp="1"
+		moveSlowDown="1"
+		groundSlowDown="2"
+			   
+		dashCheckTime="250"
+		dashTime="80"
+		dashSpeed="40"
+			   
+		jumpHeight="10"
+		jumpHoldTime="150"
+		jumpHoldHeight="1"
+		jumpBuffer="300"
+			   
+		maxGravity="40"
+		gravity="0.5"
+			   
+		idleStartFrame="0"
+		idleFrames="4"
+		idleFrameDelay="50"
+
+		jumpFrame="1"
+
+		runStartFrame="1"
+		runFrames="1"
+		runFramesDelay="1"
+
+		attackStartFrame="1"
+		attackHitFrame="17"
+		attackFrames="1"
+		attackFramesDelay="1"
+
+		specialStartFrame="1"
+		specialHitFrame="1"
+		specialFrames="1"
+		specialFramesDelay="1"
+
+		deadFrame="1"/>
+	<character name="Strawberry"
+		maxMoveSpeed="15"
+		moveSpeedUp="1"
+		moveSlowDown="1"
+		groundSlowDown="2"
+			   
+		dashCheckTime="250"
+		dashTime="80"
+		dashSpeed="40"
+			   
+		jumpHeight="10"
+		jumpHoldTime="150"
+		jumpHoldHeight="1"
+		jumpBuffer="300"
+			   
+		maxGravity="40"
+		gravity="0.5"
+			   
+		idleStartFrame="0"
+		idleFrames="4"
+		idleFrameDelay="50"
+
+		jumpFrame="1"
+
+		runStartFrame="1"
+		runFrames="1"
+		runFramesDelay="1"
+
+		attackStartFrame="1"
+		attackHitFrame="17"
+		attackFrames="1"
+		attackFramesDelay="1"
+
+		specialStartFrame="1"
+		specialHitFrame="1"
+		specialFrames="1"
+		specialFramesDelay="1"
+
+		deadFrame="1"/>
+	<character name="Raspberry"
+		maxMoveSpeed="15"
+		moveSpeedUp="1"
+		moveSlowDown="1"
+		groundSlowDown="2"
+			   
+		dashCheckTime="250"
+		dashTime="80"
+		dashSpeed="40"
+			   
+		jumpHeight="10"
+		jumpHoldTime="150"
+		jumpHoldHeight="1"
+		jumpBuffer="300"
+			   
+		maxGravity="40"
+		gravity="0.5"
+			   
+		idleStartFrame="0"
+		idleFrames="3"
+		idleFrameDelay="50"
+
+		jumpFrame="7"
+
+		runStartFrame="4"
+		runFrames="4"
+		runFramesDelay="20"
+
+		attackStartFrame="8"
+		attackHitFrame="9"
+		attackFrames="2"
+		attackFramesDelay="30"
+
+		specialStartFrame="10"
+		specialHitFrame="11"
+		specialFrames="2"
+		specialFramesDelay="30"/>
+	<character name="MelonBoss"
+		maxMoveSpeed="15"
+		moveSpeedUp="1"
+		moveSlowDown="1"
+		groundSlowDown="2"
+			   
+		dashCheckTime="250"
+		dashTime="80"
+		dashSpeed="40"
+			   
+		jumpHeight="10"
+		jumpHoldTime="150"
+		jumpHoldHeight="1"
+		jumpBuffer="300"
+			   
+		maxGravity="40"
+		gravity="0.5"
+			   
+		idleStartFrame="0"
+		idleFrames="3"
+		idleFrameDelay="50"
+
+		jumpFrame="7"
+
+		runStartFrame="4"
+		runFrames="4"
+		runFramesDelay="20"
+
+		attackStartFrame="8"
+		attackHitFrame="9"
+		attackFrames="2"
+		attackFramesDelay="30"
+
+		specialStartFrame="10"
+		specialHitFrame="11"
+		specialFrames="2"
+		specialFramesDelay="30"
+
+		deadFrame="1"/>
 </characterList>
