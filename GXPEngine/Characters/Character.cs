@@ -98,7 +98,7 @@ public class Character : Sprite
 
         max_gravity = self.maxGravity;
         gravity = self.gravity;
-
+ 
         
 
 
@@ -114,7 +114,12 @@ public class Character : Sprite
         x = playerId == 0 ? 300 : 1000;
 
         other = pOther;
-        
+
+        string playerheaderfile = "player1.png"; if (pPlayerId == 1) { playerheaderfile = "player2.png"; }
+        new Pointer(playerheaderfile,this);
+
+        //header.SetXY(this.x,this.y);
+
         SetupUI();
         game.AddChild(this);
     }
