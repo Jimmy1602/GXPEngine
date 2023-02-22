@@ -62,6 +62,7 @@
     <Compile Include="Attacks\GroundPound.cs" />
     <Compile Include="Attacks\VisibleAttackSprite.cs" />
     <Compile Include="cardreader.cs" />
+    <Compile Include="Characters\Room.cs" />
     <Compile Include="Characters\GroundCollision.cs" />
     <Compile Include="Characters\Pointer.cs" />
     <Compile Include="Characters\VisibleSprite.cs" />

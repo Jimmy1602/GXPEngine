@@ -19,7 +19,7 @@ public class Character : Sprite
 
     public int ground = 600;
 
-    int maxOutside = 200;
+    int maxOutside = 250;
 
     public Character other;
 

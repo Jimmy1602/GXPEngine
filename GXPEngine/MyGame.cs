@@ -41,20 +41,9 @@ public class MyGame : Game {
         // also dont try to change plattform height pls it breaks it :(
         // also if the player moves down to fast it I'll fall throught the plattform, I hope that doesnt happen with normal movement. If that happens with some down spike its a feature :)
 
-        Sprite background = new Sprite("Background.png", false, false, false);
-        Plattform plattform = new Plattform("Plattform.png", width/2, height - 100);
-        background.width = width; background.height = height;
+        RoomController roomControl = new RoomController(this);
+        roomControl.CreateRandomRoom();
 
-        Plattforms.Add(plattform);
-        
-        AddChild(background);
-        AddChild(plattform);
-
-        plattform = new Plattform("Plattform.png", 200, 400, 400);
-
-        Plattforms.Add(plattform);
-
-        AddChild(plattform);
 
         isCharacterSelect = true;
         Backgroundp1 = new Sprite("bkplayer1.png"); Backgroundp1.SetXY(width / 2, height / 2);
