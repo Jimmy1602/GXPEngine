@@ -23,9 +23,11 @@ public class MyGame : Game {
     public Sprite Backgroundp1;
     public Sprite Backgroundp2;
 
+    public List<Plattform> Plattforms = new List<Plattform>();
 
     public MyGame() : base(1366, 768, false, false, 600, 400)
 	{
+
         characterData = xmlReader.ReadCharacterMap("Characters.xml");
         attackData = xmlReader.ReadAttackMap("Attacks.xml");
         
@@ -35,13 +37,23 @@ public class MyGame : Game {
 
     void StartGame()
     {
+        // If you make a new plattform add it to the Plattforms List/Array, the player uses this array to check if it is grounded
+        // also dont try to change plattform height pls it breaks it :(
+        // also if the player moves down to fast it I'll fall throught the plattform, I hope that doesnt happen with normal movement. If that happens with some down spike its a feature :)
+
         Sprite background = new Sprite("Background.png", false, false, false);
-        Sprite plattform = new Sprite("Plattform.png");
+        Plattform plattform = new Plattform("Plattform.png", width/2, height - 100);
         background.width = width; background.height = height;
-        plattform.width = (int)(width * 1); plattform.height = (int)(height * 1);
-        plattform.x += width / 2;
-        plattform.y = height - plattform.height / 2;
+
+        Plattforms.Add(plattform);
+        
         AddChild(background);
+        AddChild(plattform);
+
+        plattform = new Plattform("Plattform.png", 200, 400, 400);
+
+        Plattforms.Add(plattform);
+
         AddChild(plattform);
 
         isCharacterSelect = true;

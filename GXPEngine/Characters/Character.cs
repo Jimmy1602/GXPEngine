@@ -72,10 +72,10 @@ public class Character : Sprite
 
     public Character(CharacterSheet characterdata, int characterId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, string imageFileName, int columns, int rows) : base("CharacterRect.png", false, true, false)
     {
-        groundCollision = new GroundCollision(this);
-        AddChild(groundCollision);
 
         myGame = pMyGame;
+        groundCollision = new GroundCollision(this, myGame);
+        AddChild(groundCollision);
 
         basicAttack = pBasicAttack;
         specialAttack = pSpecialAttack;
@@ -104,7 +104,8 @@ public class Character : Sprite
 
         width = 100;
         height = 100;
-        y = ground;
+        //y = ground;
+        y = 400;
     }
 
     public void Spawn(int pPlayerId, Character pOther)
@@ -366,12 +367,14 @@ public class Character : Sprite
 
         y += moveVector.y;
 
+        /*
         if (y > ground)
         {
             y = ground;
             moveVector.y = 0;
             grounded = true;
         }
+        */
     }
 
     public void getHit(float dmg, Vector2 direction)
@@ -402,7 +405,7 @@ public class Character : Sprite
 
     private void Die()
     {
-        if(x < -maxOutside || x > game.width + maxOutside || y < -maxOutside)
+        if(x < -maxOutside || x > game.width + maxOutside || y < -maxOutside || y > game.height + maxOutside)
         {
             myGame.ResetGame();
         }

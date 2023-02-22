@@ -9,8 +9,21 @@ using GXPEngine.Core;
 
 public class Plattform : Sprite
 {
-    public Plattform(String imageFileName) : base(imageFileName)
-    {
 
+    Sprite visibleSprite;
+    public Plattform(String imageFileName, int pX, int pY, int pWidth = 1000) : base("BlackSquare.png")//"CharacterRect.png")
+    {
+        visibleSprite = new Sprite(imageFileName);
+
+        width = pWidth;
+        height = 50;
+       
+        x = pX;
+        y = pY;
+
+        visibleSprite.width = 100;
+        visibleSprite.height = 200;
+        visibleSprite.y = 50;
+        AddChild(visibleSprite);
     }
 }
