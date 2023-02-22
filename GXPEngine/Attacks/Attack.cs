@@ -29,7 +29,7 @@ public class Attack : Sprite
     public bool staticAnim = false;
     public bool basic = false;
 
-    public Attack(AttackProperties self, String imageFilename = "circle.png") : base(imageFilename)
+    public Attack(AttackProperties self, String imageFilename = "CharacterRect.png") : base(imageFilename)
     {
         attackTimer = new Timer(self.time);
         iFrames = new Timer(self.iMillis, true);

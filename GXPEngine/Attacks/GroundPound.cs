@@ -11,13 +11,28 @@ using XmlReader;
 class GroundPound : Attack
 {
     int speed;
+    byte time;
 
     bool alreadyReachedGround = false;
+
+    VisibleAttackSprite visibleSprite;
 
     public GroundPound(AttackProperties self) : base(self)
     {
         staticAnim = true;
         speed = self.speed;
+        time = (byte)self.time;
+        visibleSprite = new VisibleAttackSprite("ground_effect_sprite_sheet.png", 4, 1);
+        visibleSprite.width *= 4;
+        visibleSprite.height *= 4;
+        visibleSprite.x -= visibleSprite.width / 2;
+        visibleSprite.y -= visibleSprite.height / 2;
+        visibleSprite.x += 10;
+        visibleSprite.y -= 100;
+
+
+        AddChild(visibleSprite);
+        visibleSprite.SetCycle(0, 1, 255);
     }
 
     public override void Spawn(int direction, Character Pcaster)
@@ -44,18 +59,22 @@ class GroundPound : Attack
                 reachedGround();
             }
         }
-
+        else if(visible)
+        {
+            visibleSprite.Animate();
+        }
 
         collisionHandling();
 
-        if (attackTimer.cooldownDone() && alreadyReachedGround && visible)
+        if (visibleSprite.currentFrame == 3 && alreadyReachedGround && visible)
         {
             caster.grounded = true;
             caster.blockMovement = false;
             caster.canFall = true;
             alreadyReachedGround = false;
-            width /= 3;
-            height /= 3;
+            visibleSprite.SetCycle(0, 1, 255);
+            //width /= 3;
+            //height /= 3;
             Die();
         }
     }
@@ -64,15 +83,18 @@ class GroundPound : Attack
     {
         alreadyReachedGround = true;
         caster.y = caster.ground;
-        width *= 3;
-        height *= 3;
+        //width *= 3;
+        //height *= 3;
         caster.toNextFrame();
+
+        
+        visibleSprite.SetCycle(0, 4, time);
 
         attackTimer.reset();
     }
 
     protected override void HitPlayer(Character target)
     {
-        target.getHit(damage, new Vector2(y < target.y ? xKnockback : -xKnockback, -yKnockback));
+        target.getHit(damage, new Vector2(caster.x < target.x ? xKnockback : -xKnockback, -yKnockback));
     }
 }

@@ -23,15 +23,21 @@ public class MyGame : Game {
 
     public MyGame() : base(1366, 768, false, true, 600, 400)
 	{
-        Sprite background = new Sprite("CharacterRectWhite.png", false, false, false);
+        Sprite background = new Sprite("Background.png", false, false, false);
+        Sprite plattform = new Sprite("Plattform.png");
         background.width = width; background.height = height;
+        plattform.width =(int)(width * 1); plattform.height = (int)(height * 1);
+        plattform.x += width / 2;
+        plattform.y = height - plattform.height/2;
         AddChild(background);
+        AddChild(plattform);
 
         characterData = xmlReader.ReadCharacterMap("Characters.xml");
         attackData = xmlReader.ReadAttackMap("Attacks.xml");
         
         StartGame();
     }
+
 
     void StartGame()
     {

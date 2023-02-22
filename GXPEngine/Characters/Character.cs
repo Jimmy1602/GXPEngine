@@ -19,6 +19,8 @@ public class Character : Sprite
 
     public int ground = 600;
 
+    int maxOutside = 200;
+
     public Character other;
 
     public Vector2 moveVector = new Vector2();
@@ -125,6 +127,7 @@ public class Character : Sprite
 
         if (attackCooldown.cooldownDone())
         {
+            Console.WriteLine("haiuefhiuafh");
             canAttack = true;
         }
 
@@ -178,8 +181,6 @@ public class Character : Sprite
             specialing = true;
             //attack = specialAttack;
         }
-
-
         //attack.Spawn(visibleSprite.isMirrored() ? -1 : 1, this);
     }
 
@@ -388,7 +389,7 @@ public class Character : Sprite
 
     private void Die()
     {
-        if(x < -150 || x > game.width + 150 || y < -150)
+        if(x < -maxOutside || x > game.width + maxOutside || y < -maxOutside)
         {
             myGame.ResetGame();
         }

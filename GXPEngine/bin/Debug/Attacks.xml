@@ -19,14 +19,15 @@
 		speed="20"
 		backSpeed="40"
 		special="1"/>
+	<!--groundPound time is in frames per anim frame :)-->
 	<attack name="GroundPound"
-		time="200"
+		time="3"
 		cooldown="1000"
 	    damage="5"
 		xKnockback="1.5"
-		yKnockback="3"
+		yKnockback="1.5"
 		iMillis="300"
 		offset="30"
-		speed="60"
+		speed="50"
 		special="1"/>
 </attackList>
