@@ -75,7 +75,6 @@ public class Character : Sprite
         basicAttack = pBasicAttack;
         specialAttack = pSpecialAttack;
 
-
         CharacterProperties self = characterdata.characters[characterId];
         visibleSprite = new VisibleSprite(this, self, imageFileName, columns, rows);
         AddChild(visibleSprite);

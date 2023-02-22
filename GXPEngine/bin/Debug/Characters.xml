@@ -1,62 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <characterList>
 	<character name="Apple" 
-		maxMoveSpeed="15"
-		moveSpeedUp="1"
-		moveSlowDown="1"
-		groundSlowDown="2"
-			   
-		dashCheckTime="250"
-		dashTime="100"
-		dashSpeed="30"
-			   
-		jumpHeight="10"
-		jumpHoldTime="150"
-		jumpHoldHeight="1"
-		jumpBuffer="300"
-			   
-		maxGravity="40"
-		gravity="0.5"
-			   
-		idleStartFrame="0"
-		idleFrames="4"
-		idleFrameDelay="50"
-
-		jumpFrame="1"
-
-		runStartFrame="1"
-		runFrames="1"
-		runFramesDelay="1"
-
-		attackStartFrame="14"
-		attackHitFrame="17"
-		attackFrames="5"
-		attackFramesDelay="30"
-
-		specialStartFrame="35"
-		specialHitFrame="36"
-		specialFrames="3"
-		specialFramesDelay="40"
-
-		deadFrame="1">
-	</character>
-	<character name="Banana" 
 		maxMoveSpeed="10"
-		moveSpeedUp="0.3"
+		moveSpeedUp="3"
 		moveSlowDown="1"
-		groundSlowDown="2"
+		groundSlowDown="3"
 			   
 		dashCheckTime="250"
 		dashTime="100"
-		dashSpeed="18"
+		dashSpeed="25"
 			   
-		jumpHeight="9"
+		jumpHeight="30"
 		jumpHoldTime="150"
 		jumpHoldHeight="1"
 		jumpBuffer="300"
 			   
 		maxGravity="40"
-		gravity="0.5"
+		gravity="2.5"
 			   
 		idleStartFrame="0"
 		idleFrames="3"
@@ -80,83 +40,243 @@
 
 		deadFrame="1">
 	</character>
-	<character name="Lemon" 
-		maxMoveSpeed="15"
-		moveSpeedUp="1"
+	<character name="Banana" 
+		maxMoveSpeed="10"
+		moveSpeedUp="3"
 		moveSlowDown="1"
-		groundSlowDown="2"
+		groundSlowDown="3"
 			   
 		dashCheckTime="250"
 		dashTime="100"
-		dashSpeed="30"
+		dashSpeed="25"
 			   
-		jumpHeight="10"
+		jumpHeight="30"
 		jumpHoldTime="150"
 		jumpHoldHeight="1"
 		jumpBuffer="300"
 			   
 		maxGravity="40"
-		gravity="0.5"
+		gravity="2.5"
 			   
 		idleStartFrame="0"
-		idleFrames="4"
+		idleFrames="3"
 		idleFrameDelay="50"
 
-		jumpFrame="1"
+		jumpFrame="18"
 
-		runStartFrame="1"
-		runFrames="1"
-		runFramesDelay="1"
+		runStartFrame="6"
+		runFrames="4"
+		runFramesDelay="10"
 
-		attackStartFrame="14"
-		attackHitFrame="17"
-		attackFrames="5"
+		attackStartFrame="12"
+		attackHitFrame="13"
+		attackFrames="2"
 		attackFramesDelay="30"
 
-		specialStartFrame="1"
-		specialHitFrame="1"
-		specialFrames="1"
-		specialFramesDelay="1"
+		specialStartFrame="30"
+		specialHitFrame="30"
+		specialFrames="2"
+		specialFramesDelay="255"
 
 		deadFrame="1">
 	</character>
-	<character name="Tomato"
-		maxMoveSpeed="15"
-		moveSpeedUp="1"
+		<character name="Lemon" 
+		maxMoveSpeed="10"
+		moveSpeedUp="3"
 		moveSlowDown="1"
-		groundSlowDown="2"
+		groundSlowDown="3"
 			   
 		dashCheckTime="250"
-		dashTime="80"
-		dashSpeed="40"
+		dashTime="100"
+		dashSpeed="25"
 			   
-		jumpHeight="10"
+		jumpHeight="30"
 		jumpHoldTime="150"
 		jumpHoldHeight="1"
 		jumpBuffer="300"
 			   
 		maxGravity="40"
-		gravity="0.5"
+		gravity="2.5"
 			   
 		idleStartFrame="0"
-		idleFrames="4"
+		idleFrames="3"
 		idleFrameDelay="50"
 
-		jumpFrame="1"
+		jumpFrame="18"
 
-		runStartFrame="1"
-		runFrames="1"
-		runFramesDelay="1"
+		runStartFrame="6"
+		runFrames="4"
+		runFramesDelay="10"
 
-		attackStartFrame="1"
-		attackHitFrame="17"
-		attackFrames="1"
-		attackFramesDelay="1"
+		attackStartFrame="12"
+		attackHitFrame="13"
+		attackFrames="2"
+		attackFramesDelay="30"
 
-		specialStartFrame="1"
-		specialHitFrame="1"
-		specialFrames="1"
-		specialFramesDelay="1"
+		specialStartFrame="30"
+		specialHitFrame="30"
+		specialFrames="2"
+		specialFramesDelay="255"
+
+		deadFrame="1">
+	</character>
+	<character name="Tomato" 
+		maxMoveSpeed="10"
+		moveSpeedUp="3"
+		moveSlowDown="1"
+		groundSlowDown="3"
+			   
+		dashCheckTime="250"
+		dashTime="100"
+		dashSpeed="25"
+			   
+		jumpHeight="30"
+		jumpHoldTime="150"
+		jumpHoldHeight="1"
+		jumpBuffer="300"
+			   
+		maxGravity="40"
+		gravity="2.5"
+			   
+		idleStartFrame="0"
+		idleFrames="3"
+		idleFrameDelay="50"
+
+		jumpFrame="18"
+
+		runStartFrame="6"
+		runFrames="4"
+		runFramesDelay="10"
+
+		attackStartFrame="12"
+		attackHitFrame="13"
+		attackFrames="2"
+		attackFramesDelay="30"
+
+		specialStartFrame="30"
+		specialHitFrame="30"
+		specialFrames="2"
+		specialFramesDelay="255"
+
+		deadFrame="1">
+	</character>
+	<character name="Strawberry" 
+		maxMoveSpeed="10"
+		moveSpeedUp="3"
+		moveSlowDown="1"
+		groundSlowDown="3"
+			   
+		dashCheckTime="250"
+		dashTime="100"
+		dashSpeed="25"
+			   
+		jumpHeight="30"
+		jumpHoldTime="150"
+		jumpHoldHeight="1"
+		jumpBuffer="300"
+			   
+		maxGravity="40"
+		gravity="2.5"
+			   
+		idleStartFrame="0"
+		idleFrames="3"
+		idleFrameDelay="50"
+
+		jumpFrame="18"
+
+		runStartFrame="6"
+		runFrames="4"
+		runFramesDelay="10"
+
+		attackStartFrame="12"
+		attackHitFrame="13"
+		attackFrames="2"
+		attackFramesDelay="30"
+
+		specialStartFrame="30"
+		specialHitFrame="30"
+		specialFrames="2"
+		specialFramesDelay="255"
+
+		deadFrame="1">
+	</character>
+	<character name="Raspberry" 
+		maxMoveSpeed="10"
+		moveSpeedUp="3"
+		moveSlowDown="1"
+		groundSlowDown="3"
+			   
+		dashCheckTime="250"
+		dashTime="100"
+		dashSpeed="25"
+			   
+		jumpHeight="30"
+		jumpHoldTime="150"
+		jumpHoldHeight="1"
+		jumpBuffer="300"
+			   
+		maxGravity="40"
+		gravity="2.5"
+			   
+		idleStartFrame="0"
+		idleFrames="3"
+		idleFrameDelay="50"
+
+		jumpFrame="18"
+
+		runStartFrame="6"
+		runFrames="4"
+		runFramesDelay="10"
+
+		attackStartFrame="12"
+		attackHitFrame="13"
+		attackFrames="2"
+		attackFramesDelay="30"
+
+		specialStartFrame="30"
+		specialHitFrame="30"
+		specialFrames="2"
+		specialFramesDelay="255"
+
+		deadFrame="1">
+	</character>
+	<character name="Melon" 
+		maxMoveSpeed="10"
+		moveSpeedUp="3"
+		moveSlowDown="1"
+		groundSlowDown="3"
+			   
+		dashCheckTime="250"
+		dashTime="100"
+		dashSpeed="25"
+			   
+		jumpHeight="30"
+		jumpHoldTime="150"
+		jumpHoldHeight="1"
+		jumpBuffer="300"
+			   
+		maxGravity="40"
+		gravity="2.5"
+			   
+		idleStartFrame="0"
+		idleFrames="3"
+		idleFrameDelay="50"
+
+		jumpFrame="18"
+
+		runStartFrame="6"
+		runFrames="4"
+		runFramesDelay="10"
+
+		attackStartFrame="12"
+		attackHitFrame="13"
+		attackFrames="2"
+		attackFramesDelay="30"
+
+		specialStartFrame="30"
+		specialHitFrame="30"
+		specialFrames="2"
+		specialFramesDelay="255"
 
 		deadFrame="1">
 	</character>
