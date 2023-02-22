@@ -20,6 +20,9 @@ public class MyGame : Game {
     private CharacterSheet characterData;
     private AttackSheet attackData;
 
+    public Sprite Backgroundp1;
+    public Sprite Backgroundp2;
+
 
     public MyGame() : base(1366, 768, false, true, 600, 400)
 	{
@@ -36,16 +39,26 @@ public class MyGame : Game {
     void StartGame()
     {
         isCharacterSelect = true;
+        Backgroundp1 = new Sprite("bkplayer1.png"); Backgroundp1.SetXY(width / 2, height / 2);
+        Backgroundp2 = new Sprite("bkplayer2.png"); Backgroundp2.SetXY(width / 2, height / 2);
+        AddChild(Backgroundp2); AddChild(Backgroundp1);
     }
 
     void Update()
     {
         if (isCharacterSelect)
+        {
             characterSelect();
+        }
+        else
+        {
+            Backgroundp1.visible = false; Backgroundp2.visible = false;
+        }
     }
 
     void characterSelect()
-    {
+    {   
+
         if (playerOne != null && playerTwo != null)
         {
             playerOne.Spawn(0, playerTwo);
@@ -56,7 +69,14 @@ public class MyGame : Game {
 
         bool selectforplayertwo = (playerOne != null && playerTwo == null);
 
-
+        if (selectforplayertwo)
+        {
+            Backgroundp1.visible = false; Backgroundp2.visible = true;
+        }
+        else
+        {
+            Backgroundp1.visible = true; Backgroundp2.visible = false;
+        }
 
         int id = cardreader.readcard(selectforplayertwo);
         if (id == -1)
