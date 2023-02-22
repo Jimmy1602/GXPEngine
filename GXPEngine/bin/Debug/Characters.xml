@@ -42,21 +42,21 @@
 	</character>
 	<character name="Orange" 
 		maxMoveSpeed="10"
-		moveSpeedUp="0.3"
+		moveSpeedUp="3"
 		moveSlowDown="1"
-		groundSlowDown="2"
+		groundSlowDown="3"
 			   
 		dashCheckTime="250"
 		dashTime="100"
-		dashSpeed="18"
+		dashSpeed="25"
 			   
-		jumpHeight="9"
+		jumpHeight="30"
 		jumpHoldTime="150"
 		jumpHoldHeight="1"
 		jumpBuffer="300"
 			   
 		maxGravity="40"
-		gravity="0.5"
+		gravity="2.5"
 			   
 		idleStartFrame="0"
 		idleFrames="3"
@@ -81,10 +81,10 @@
 		deadFrame="1">
 	</character>
 	<character name="Banana" 
-		maxMoveSpeed="15"
-		moveSpeedUp="1"
-		moveSlowDown="1"
-		groundSlowDown="2"
+		maxMoveSpeed="2000"
+		moveSpeedUp="20"
+		moveSlowDown="10"
+		groundSlowDown="10"
 			   
 		dashCheckTime="250"
 		dashTime="100"
