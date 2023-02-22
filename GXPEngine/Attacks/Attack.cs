@@ -12,29 +12,42 @@ using XmlReader;
 
 public class Attack : Sprite
 {
-    int xOffSet = 100;
     protected Timer attackTimer;
     protected Character caster;
+    float damage;
+    float xKnockback;
+    float yKnockback;
 
-    Timer windUp = new Timer(200, false);
-    Timer iFrames = new Timer(300, true);
+    public int offset;
+    private int baseOffset;
+
+    Timer iFrames;
     protected bool canHit = true;
 
-    int cooldown = DesignerChanges.attackCooldown;
+    int cooldown;
 
-    public Attack(String imageFilename = "circle.png") : base(imageFilename)
+    public bool staticAnim = false;
+
+    public Attack(AttackProperties self, String imageFilename = "circle.png") : base(imageFilename)
     {
-        attackTimer = new Timer(200);
+        attackTimer = new Timer(self.time);
+        iFrames = new Timer(self.iMillis, true);
+        cooldown = self.cooldown;
+        damage = self.damage;
+        xKnockback = self.xKnockback;
+        yKnockback = self.yKnockback;
+        offset = self.offset;
+        baseOffset = offset;
+
+        visible = false;
     }
 
     public virtual void Spawn(int direction, Character Pcaster)
     {
-        xOffSet = direction * 100;
-
+        offset = direction * baseOffset;
         UniversalSpawn(Pcaster);
 
-        caster.attacking = true;
-        x += xOffSet;
+        x += offset;
     }
 
     protected void UniversalSpawn(Character Pcaster)
@@ -61,10 +74,10 @@ public class Attack : Sprite
             Die();
         }
 
-        collisionHandeling();
+        collisionHandling();
     }
 
-    protected void collisionHandeling()
+    protected void collisionHandling()
     {
         if (!HitTest(caster.other) || iFrames.cooldownDone())
         {
@@ -86,7 +99,7 @@ public class Attack : Sprite
 
     protected virtual void HitPlayer(Character target)
     {
-        target.getHit(DesignerChanges.attackDamage, new Vector2(xOffSet/100 * DesignerChanges.attackKnockbackX, -DesignerChanges.attackKnockbackY));
+        target.getHit(damage, new Vector2(offset/100 * xKnockback, -yKnockback));
         
     }
 

@@ -81,13 +81,13 @@ public class MyGame : Game {
         switch (id)
         {
             case 0:
-                player = new Character(characterData, id, this, new Attack(), new Attack(), "lemon_sprite_sheet.png", 7, 6);
+                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "orange_sprite_sheet.png", 6, 6);
                 break;
             case 1:
-                player = new Character(characterData, id, this, new Attack(), new Boomerang(), "lemon_sprite_sheet.png", 7, 6);
+                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new GroundPound(attackData.attacks[2]), "orange_sprite_sheet.png", 6, 6);
                 break;
             case 2:
-                player = new Character(characterData, id, this, new Boomerang(), new Attack(), "lemon_sprite_sheet.png", 7, 6);
+                player = new Character(characterData, id, this, new Boomerang(attackData.attacks[1]), new Attack(attackData.attacks[0]), "orange_sprite_sheet.png", 6, 6);
                 break;
         }
 

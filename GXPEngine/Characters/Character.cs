@@ -17,6 +17,8 @@ public class Character : Sprite
 {
     public int playerId = 0;
 
+    public int ground = 600;
+
     public Character other;
 
     public Vector2 moveVector = new Vector2();
@@ -31,7 +33,7 @@ public class Character : Sprite
     protected int max_gravity;
     protected float gravity;
 
-    bool grounded = true;
+    public bool grounded { private set; get; } = true;
     public bool attacking = false;
     public bool specialing = false;
     public bool canAttack = true;
@@ -68,7 +70,7 @@ public class Character : Sprite
 
 
         CharacterProperties self = characterdata.characters[characterId];
-        visibleSprite = new VisibleSprite(self, imageFileName, columns, rows);
+        visibleSprite = new VisibleSprite(this, self, imageFileName, columns, rows);
         AddChild(visibleSprite);
         max_move_speed = self.maxMoveSpeed;
         move_speed_up = self.moveSpeedUp;
@@ -90,7 +92,7 @@ public class Character : Sprite
 
         width = 100;
         height = 100;
-        y = 600;
+        y = ground;
     }
 
     public void Spawn(int pPlayerId, Character pOther)
@@ -126,8 +128,20 @@ public class Character : Sprite
             Fall();
         }
 
+        
+
+        Mirror(inputVector);
 
         x += moveVector.x;
+
+        animationLogic();
+        visibleSprite.Animate();
+
+        Die();
+    }
+
+    void Mirror(Vector2 inputVector)
+    {
         if(inputVector.x != 0)
         {
             directionVector.x = inputVector.x;
@@ -141,27 +155,34 @@ public class Character : Sprite
                 visibleSprite.Mirror(false, false);
             }
         }
-
-        animationLogic();
-        visibleSprite.Animate();
-
-        Die();
     }
-
    
     void Attack(Vector2 inputVector)
     {
-        Attack attack;
+        //Attack attack;
         if (grounded)
         {
-            attack = basicAttack;
+            attacking = true;
+            //attack = basicAttack;
         }
         else
         {
-            attack = specialAttack;
+            specialing = true;
+            //attack = specialAttack;
         }
 
-        attack.Spawn(visibleSprite.isMirrored() ? -1 : 1, this);
+
+        //attack.Spawn(visibleSprite.isMirrored() ? -1 : 1, this);
+    }
+
+    public void spawnAttack(bool special)
+    {
+        Attack attack = special ? specialAttack : basicAttack;
+
+        if (!attack.visible)
+        {
+            attack.Spawn(visibleSprite.isMirrored() ? -1 : 1, this);
+        }
     }
 
     Vector2 MoveInputHandeling()
@@ -323,9 +344,9 @@ public class Character : Sprite
 
         y += moveVector.y;
 
-        if (y > 600)
+        if (y > ground)
         {
-            y = 600;
+            y = ground;
             moveVector.y = 0;
             grounded = true;
         }
@@ -382,13 +403,19 @@ public class Character : Sprite
         }
         else if (specialing)
         {
-            visibleSprite.SetSpecialAnim();
+            if(specialAttack.staticAnim)
+            {
+                visibleSprite.SetStaticSpecialAnim();
+            }
+            else
+            {
+                visibleSprite.SetSpecialAnim();
+            }
         }
         else if (attacking)
         {
             visibleSprite.SetAttackAnim();
         }
-
     }
 }
 

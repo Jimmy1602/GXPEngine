@@ -110,6 +110,8 @@ namespace XmlReader
 
         [XmlAttribute("attackStartFrame")]
         public int attackStartFrame;
+        [XmlAttribute("attackHitFrame")]
+        public int attackHitFrame;
         [XmlAttribute("attackFrames")]
         public int attackFrames;
         [XmlAttribute("attackFramesDelay")]
@@ -117,6 +119,8 @@ namespace XmlReader
 
         [XmlAttribute("specialStartFrame")]
         public int specialStartFrame;
+        [XmlAttribute("specialHitFrame")]
+        public int specialHitFrame;
         [XmlAttribute("specialFrames")]
         public int specialFrames;
         [XmlAttribute("specialFramesDelay")]
@@ -138,10 +142,10 @@ namespace XmlReader
     public class AttackProperties : PropertyContainer
     {
         [XmlAttribute("name")]
-        public string name;  // <3
+        public string name;
 
-        [XmlAttribute("windupTime")]
-        public int windupTime;
+        [XmlAttribute("cooldown")]
+        public int cooldown;
 
         [XmlAttribute("damage")]
         public float damage;
@@ -156,6 +160,14 @@ namespace XmlReader
 
         [XmlAttribute("iMillis")]
         public int iMillis;
+
+        [XmlAttribute("offset")]
+        public int offset;
+
+        [XmlAttribute("speed")]
+        public int speed;
+        [XmlAttribute("backSpeed")]
+        public int backSpeed;
     }
 
     public class PropertyContainer

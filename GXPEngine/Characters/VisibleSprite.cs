@@ -23,10 +23,12 @@ class VisibleSprite : AnimationSprite
     byte runFramesDelay;
 
     int attackStartFrame;
+    int attackHitFrame;
     int attackFrames;
     byte attackFramesDelay;
 
     int specialStartFrame;
+    int specialHitFrame;
     int specialFrames;
     byte specialFramesDelay;
 
@@ -38,9 +40,14 @@ class VisibleSprite : AnimationSprite
     bool looped = false;
     public bool animDone { get; private set; } = false;
 
+    public bool attackHit = false;
+    public bool specialHit = false;
 
-    public VisibleSprite(CharacterProperties self, String imageFilename, int cols, int rows) : base(imageFilename, cols, rows, -1, false, false)
+    Character owner;
+
+    public VisibleSprite(Character pOwner, CharacterProperties self, String imageFilename, int cols, int rows) : base(imageFilename, cols, rows, -1, false, false)
     {
+        owner = pOwner;
         width = 120;
         height = 120;
 
@@ -55,10 +62,12 @@ class VisibleSprite : AnimationSprite
         runFramesDelay = self.runFramesDelay;
 
         attackStartFrame = self.attackStartFrame;
+        attackHitFrame = self.attackHitFrame;
         attackFrames = self.attackFrames;
         attackFramesDelay = self.attackFramesDelay;
 
         specialStartFrame = self.specialStartFrame;
+        specialHitFrame = self.specialHitFrame;
         specialFrames = self.specialFrames;
         specialFramesDelay = self.specialFramesDelay;
 
@@ -76,9 +85,23 @@ class VisibleSprite : AnimationSprite
         {
             looped = true;
         }
-        if (looped && currentFrame == startFrame)
+        else if (looped && currentFrame == startFrame)
         {
             animDone = true;
+            if(currentAnim == "attack" || currentAnim == "special")
+            {
+                owner.attacking = false;
+                owner.specialing = false;
+            }
+        }
+
+        if (currentFrame == attackHitFrame)
+        {
+            owner.spawnAttack(false);
+        }
+        else if (currentFrame == specialHitFrame)
+        {
+            owner.spawnAttack(true);
         }
     }
 
@@ -124,6 +147,20 @@ class VisibleSprite : AnimationSprite
         if (currentAnim != "special")
         {
             currentAnim = "special";
+            SetCycle(specialStartFrame, 1);
+            targetFrame = specialStartFrame;
+            startFrame = specialStartFrame;
+            
+            looped = false;
+            animDone = false;
+        }
+    }
+
+    public void SetStaticSpecialAnim()
+    {
+        if (currentAnim != "special")
+        {
+            currentAnim = "special";
             SetCycle(specialStartFrame, specialFrames, specialFramesDelay);
             targetFrame = specialStartFrame + specialFrames;
             startFrame = specialStartFrame;
@@ -132,6 +169,7 @@ class VisibleSprite : AnimationSprite
             animDone = false;
         }
     }
+
     public void SetDeadAnim()
     {
         if (currentAnim != "dead")

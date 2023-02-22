@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Attacks\Attack.cs" />
     <Compile Include="Attacks\Boomerang.cs" />
+    <Compile Include="Attacks\GroundPound.cs" />
     <Compile Include="cardreader.cs" />
     <Compile Include="Characters\VisibleSprite.cs" />
     <Compile Include="DesignerChanges.cs" />

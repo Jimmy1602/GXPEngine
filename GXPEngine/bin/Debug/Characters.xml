@@ -28,17 +28,19 @@
 		runFrames="1"
 		runFramesDelay="1"
 
-		attackStartFrame="1"
-		attackFrames="1"
-		attackFramesDelay="1"
+		attackStartFrame="14"
+		attackHitFrame="17"
+		attackFrames="5"
+		attackFramesDelay="30"
 
-		specialStartFrame="1"
-		specialFrames="1"
-		specialFramesDelay="1"
+		specialStartFrame="35"
+		specialHitFrame="36"
+		specialFrames="3"
+		specialFramesDelay="40"
 
 		deadFrame="1">
 	</character>
-	<character name="Banana" 
+	<character name="Orange" 
 		maxMoveSpeed="15"
 		moveSpeedUp="1"
 		moveSlowDown="1"
@@ -57,22 +59,24 @@
 		gravity="0.5"
 			   
 		idleStartFrame="0"
-		idleFrames="4"
+		idleFrames="3"
 		idleFrameDelay="50"
 
-		jumpFrame="1"
+		jumpFrame="18"
 
-		runStartFrame="1"
-		runFrames="1"
-		runFramesDelay="1"
+		runStartFrame="6"
+		runFrames="4"
+		runFramesDelay="10"
 
-		attackStartFrame="1"
-		attackFrames="1"
-		attackFramesDelay="1"
+		attackStartFrame="12"
+		attackHitFrame="13"
+		attackFrames="2"
+		attackFramesDelay="30"
 
-		specialStartFrame="1"
-		specialFrames="1"
-		specialFramesDelay="1"
+		specialStartFrame="30"
+		specialHitFrame="30"
+		specialFrames="2"
+		specialFramesDelay="255"
 
 		deadFrame="1">
 	</character>

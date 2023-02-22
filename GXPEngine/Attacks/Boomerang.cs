@@ -14,12 +14,12 @@ public class Boomerang : Attack
     private Vector2 position = new Vector2();
     private Vector2 moveVector = new Vector2();
     private int speed;
+    private int backSpeed;
 
-    int cooldown = DesignerChanges.boomerangCooldown;
-
-    public Boomerang() : base()
+    public Boomerang(AttackProperties self) : base(self)
     {
-        speed = DesignerChanges.boomerangSpeed;
+        speed = self.speed;
+        backSpeed = self.backSpeed;
     }
 
     public override void Spawn(int direction, Character Pcaster)
@@ -43,7 +43,7 @@ public class Boomerang : Attack
             moveAway();
         }
 
-        collisionHandeling();
+        collisionHandling();
     }
 
     void moveAway()
@@ -53,12 +53,12 @@ public class Boomerang : Attack
 
     void moveBack()
     {
-        if(moveTowards(getCasterPosition(), DesignerChanges.boomerangBackSpeed, DesignerChanges.boomerangBackSpeed))
+        if(moveTowards(getCasterPosition(), backSpeed, backSpeed))
         {
             Die();
         }
         moveVector = moveVector.subVectors(getCasterPosition(), position);
-        moveVector = moveVector.setMagnetude(moveVector, DesignerChanges.boomerangBackSpeed);
+        moveVector = moveVector.setMagnetude(moveVector, backSpeed);
     }
 
     protected override void HitPlayer(Character target)
