@@ -168,6 +168,9 @@ namespace XmlReader
         public int speed;
         [XmlAttribute("backSpeed")]
         public int backSpeed;
+
+        [XmlAttribute("special")]
+        public int special;
     }
 
     public class PropertyContainer

@@ -7,7 +7,8 @@
 		xKnockback="2"
 		yKnockback="2"
 		iMillis="300"
-		offset="100"/>
+		offset="100"
+		special="0"/>
 	<attack name="Boomerang"
 		time="400"
 		cooldown="1000"
@@ -16,14 +17,16 @@
 		yKnockback="0.15"
 		iMillis="300"
 		speed="20"
-		backSpeed="40"/>
+		backSpeed="40"
+		special="1"/>
 	<attack name="GroundPound"
-		time="10000"
+		time="200"
 		cooldown="1000"
 	    damage="5"
-		xKnockback="0"
-		yKnockback="-8"
+		xKnockback="1.5"
+		yKnockback="3"
 		iMillis="300"
 		offset="30"
-		speed="60"/>
+		speed="60"
+		special="1"/>
 </attackList>
