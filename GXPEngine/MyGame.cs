@@ -24,7 +24,7 @@ public class MyGame : Game {
     public Sprite Backgroundp2;
 
 
-    public MyGame() : base(1366, 768, false, true, 600, 400)
+    public MyGame() : base(1366, 768, false, false, 600, 400)
 	{
         characterData = xmlReader.ReadCharacterMap("Characters.xml");
         attackData = xmlReader.ReadAttackMap("Attacks.xml");
