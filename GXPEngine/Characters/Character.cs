@@ -33,7 +33,7 @@ public class Character : Sprite
     protected int max_gravity;
     protected float gravity;
 
-    public bool grounded { private set; get; } = true;
+    public bool grounded {  set; private get; } = true;
     public bool attacking = false;
     public bool specialing = false;
     public bool canAttack = true;
@@ -49,6 +49,8 @@ public class Character : Sprite
 
     float damage;
 
+    public bool canFall { set; private get; } = true;
+
     Timer attackCooldown = new Timer(DesignerChanges.attackCooldown, true);
     Timer jumpHoldTimer;
 
@@ -60,6 +62,9 @@ public class Character : Sprite
 
     Attack basicAttack;
     Attack specialAttack;
+
+    public bool blockMovement { set; private get; } = false;
+
 
     public Character(CharacterSheet characterdata, int characterId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, string imageFileName, int columns, int rows) : base("CharacterRect.png", false, true, false)
     {
@@ -109,9 +114,14 @@ public class Character : Sprite
 
     void Update()
     {
-        Vector2 inputVector = MoveInputHandeling();
 
-        Movement(inputVector);
+        if(!blockMovement)
+        {
+            Vector2 inputVector = MoveInputHandeling();
+            Movement(inputVector);
+            Mirror(inputVector);
+            x += moveVector.x;
+        }
 
         if (attackCooldown.cooldownDone())
         {
@@ -123,16 +133,14 @@ public class Character : Sprite
             Attack(directionVector);
         }
 
-        if (!grounded)
+        if (!grounded && canFall)
         {
             Fall();
         }
 
         
 
-        Mirror(inputVector);
 
-        x += moveVector.x;
 
         animationLogic();
         visibleSprite.Animate();
@@ -416,6 +424,11 @@ public class Character : Sprite
         {
             visibleSprite.SetAttackAnim();
         }
+    }
+
+    public void toNextFrame()
+    {
+        visibleSprite.NextFrame();
     }
 }
 

@@ -14,9 +14,9 @@ public class Attack : Sprite
 {
     protected Timer attackTimer;
     protected Character caster;
-    float damage;
-    float xKnockback;
-    float yKnockback;
+    protected float damage;
+    protected float xKnockback;
+    protected float yKnockback;
 
     public int offset;
     private int baseOffset;
@@ -27,6 +27,7 @@ public class Attack : Sprite
     int cooldown;
 
     public bool staticAnim = false;
+    public bool basic = false;
 
     public Attack(AttackProperties self, String imageFilename = "circle.png") : base(imageFilename)
     {
@@ -39,6 +40,7 @@ public class Attack : Sprite
         offset = self.offset;
         baseOffset = offset;
 
+        basic = self.special == 0 ? true : false;
         visible = false;
     }
 
@@ -111,7 +113,15 @@ public class Attack : Sprite
     protected virtual void Die()
     {
         visible = false;
-        caster.attacking = false;
+
+        if (basic)
+        {
+            caster.attacking = false;
+        }
+        else
+        {
+            caster.specialing = false;
+        }
     }
 }
 
