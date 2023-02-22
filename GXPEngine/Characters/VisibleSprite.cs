@@ -18,7 +18,7 @@ class VisibleSprite : AnimationSprite
 
     int jumpFrame;
 
-    int runStartFrame;
+    public int runStartFrame;
     int runFrames;
     byte runFramesDelay;
 

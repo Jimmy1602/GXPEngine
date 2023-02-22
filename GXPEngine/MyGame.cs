@@ -53,7 +53,6 @@ public class MyGame : Game {
 
     void Update()
     {
-        Console.WriteLine(Utils.frameRate);
         if (isCharacterSelect)
         {
             characterSelect();
@@ -112,10 +111,10 @@ public class MyGame : Game {
         switch (id)
         {
             case 0: // apple
-                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "orange_sprite_sheet.png", 6, 6);
+                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "orange_sprite_sheet.png", 4, 6);
                 break;
             case 1: // banana
-                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new GroundPound(attackData.attacks[2]), "orange_sprite_sheet.png", 6, 6);
+                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new GroundPound(attackData.attacks[2]), "orange_sprite_sheet.png", 4, 6);
                 break;
             case 2: // lemon
                 player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "orange_sprite_sheet.png", 6, 6);

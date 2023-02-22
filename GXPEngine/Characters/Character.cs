@@ -65,11 +65,16 @@ public class Character : Sprite
     Attack basicAttack;
     Attack specialAttack;
 
+    GroundCollision groundCollision;
+
     public bool blockMovement { set; private get; } = false;
 
 
     public Character(CharacterSheet characterdata, int characterId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, string imageFileName, int columns, int rows) : base("CharacterRect.png", false, true, false)
     {
+        groundCollision = new GroundCollision(this);
+        AddChild(groundCollision);
+
         myGame = pMyGame;
 
         basicAttack = pBasicAttack;
@@ -78,6 +83,7 @@ public class Character : Sprite
         CharacterProperties self = characterdata.characters[characterId];
         visibleSprite = new VisibleSprite(this, self, imageFileName, columns, rows);
         AddChild(visibleSprite);
+        AddChild(groundCollision);
         max_move_speed = self.maxMoveSpeed;
         move_speed_up = self.moveSpeedUp;
         move_slow_down = self.moveSlowDown;
@@ -115,6 +121,10 @@ public class Character : Sprite
 
     void Update()
     {
+        if (playerId== 0)
+        {
+
+        }
 
         if(!blockMovement)
         {
@@ -126,7 +136,6 @@ public class Character : Sprite
 
         if (attackCooldown.cooldownDone())
         {
-            Console.WriteLine("haiuefhiuafh");
             canAttack = true;
         }
 

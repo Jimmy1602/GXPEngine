@@ -9,11 +9,8 @@ using GXPEngine.Core;
 
 public class Plattform : Sprite
 {
-
     public Plattform(String imageFileName) : base(imageFileName)
     {
 
     }
-
-
 }

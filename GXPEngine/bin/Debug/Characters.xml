@@ -222,19 +222,19 @@
 		idleFrames="3"
 		idleFrameDelay="50"
 
-		jumpFrame="18"
+		jumpFrame="7"
 
-		runStartFrame="6"
+		runStartFrame="3"
 		runFrames="4"
 		runFramesDelay="10"
 
-		attackStartFrame="12"
-		attackHitFrame="13"
+		attackStartFrame="8"
+		attackHitFrame="9"
 		attackFrames="2"
 		attackFramesDelay="30"
 
-		specialStartFrame="30"
-		specialHitFrame="30"
+		specialStartFrame="10"
+		specialHitFrame="11"
 		specialFrames="2"
 		specialFramesDelay="255"
 
@@ -264,7 +264,7 @@
 
 		jumpFrame="18"
 
-		runStartFrame="6"
+		runStartFrame="3"
 		runFrames="4"
 		runFramesDelay="10"
 
@@ -382,7 +382,7 @@
 
 		jumpFrame="7"
 
-		runStartFrame="4"
+		runStartFrame="3"
 		runFrames="4"
 		runFramesDelay="20"
 
