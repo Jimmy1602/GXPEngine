@@ -26,14 +26,6 @@ public class MyGame : Game {
 
     public MyGame() : base(1366, 768, false, true, 600, 400)
 	{
-        Sprite background = new Sprite("Background.png", false, false, false);
-        Sprite plattform = new Sprite("Plattform.png");
-        background.width = width; background.height = height;
-        plattform.width =(int)(width * 1); plattform.height = (int)(height * 1);
-        plattform.x += width / 2;
-        plattform.y = height - plattform.height/2;
-        AddChild(background);
-        AddChild(plattform);
 
         characterData = xmlReader.ReadCharacterMap("Characters.xml");
         attackData = xmlReader.ReadAttackMap("Attacks.xml");
@@ -44,10 +36,20 @@ public class MyGame : Game {
 
     void StartGame()
     {
+        Sprite background = new Sprite("Background.png", false, false, false);
+        Sprite plattform = new Sprite("Plattform.png");
+        background.width = width; background.height = height;
+        plattform.width = (int)(width * 1); plattform.height = (int)(height * 1);
+        plattform.x += width / 2;
+        plattform.y = height - plattform.height / 2;
+        AddChild(background);
+        AddChild(plattform);
+
         isCharacterSelect = true;
         Backgroundp1 = new Sprite("bkplayer1.png"); Backgroundp1.SetXY(width / 2, height / 2);
         Backgroundp2 = new Sprite("bkplayer2.png"); Backgroundp2.SetXY(width / 2, height / 2);
         AddChild(Backgroundp2); AddChild(Backgroundp1);
+
     }
 
     void Update()
