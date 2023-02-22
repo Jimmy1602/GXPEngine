@@ -41,16 +41,16 @@
 		deadFrame="1">
 	</character>
 	<character name="Orange" 
-		maxMoveSpeed="15"
-		moveSpeedUp="1"
+		maxMoveSpeed="10"
+		moveSpeedUp="0.3"
 		moveSlowDown="1"
 		groundSlowDown="2"
 			   
 		dashCheckTime="250"
 		dashTime="100"
-		dashSpeed="30"
+		dashSpeed="18"
 			   
-		jumpHeight="10"
+		jumpHeight="9"
 		jumpHoldTime="150"
 		jumpHoldHeight="1"
 		jumpBuffer="300"
