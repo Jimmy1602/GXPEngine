@@ -73,8 +73,6 @@ class GroundPound : Attack
             caster.canFall = true;
             alreadyReachedGround = false;
             visibleSprite.SetCycle(0, 1, 255);
-            //width /= 3;
-            //height /= 3;
             Die();
         }
     }
@@ -83,8 +81,6 @@ class GroundPound : Attack
     {
         alreadyReachedGround = true;
         caster.y = caster.ground;
-        //width *= 3;
-        //height *= 3;
         caster.toNextFrame();
 
         
