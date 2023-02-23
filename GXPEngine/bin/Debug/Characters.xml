@@ -160,7 +160,7 @@
 
 		deadFrame="13">
 	</character>
-			<character name="Orange" 
+		<character name="Orange" 
 		maxMoveSpeed="10"
 		moveSpeedUp="3"
 		moveSlowDown="1"
@@ -194,7 +194,7 @@
 		attackFramesDelay="5"
 
 		specialStartFrame="20"
-		specialHitFrame="21"
+		specialHitFrame="20"
 		specialFrames="2"
 		specialFramesDelay="10"
 

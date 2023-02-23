@@ -19,7 +19,6 @@ public class Boomerang : Attack
     public Boomerang(AttackProperties self) : base(self, "boomerang.png", 1)
     {
         attackTimer = new Timer(self.time, true);
-        Console.WriteLine(self.time);
         speed = self.speed;
         backSpeed = self.backSpeed;
     }

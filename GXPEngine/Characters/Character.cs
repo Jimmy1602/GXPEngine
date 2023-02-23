@@ -35,7 +35,7 @@ public class Character : Sprite
     protected int max_gravity;
     protected float gravity;
 
-    public bool grounded {  set; private get; } = true;
+    public bool grounded {  set;  get; } = true;
     public bool attacking = false;
     public bool specialing = false;
     public bool canAttack = true;
@@ -75,6 +75,7 @@ public class Character : Sprite
     public Character(CharacterSheet characterdata, int characterId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, string imageFileName, int columns, int rows) : base("CharacterRect.png", false, true, false)
     {
 
+
         myGame = pMyGame;
         groundCollision = new GroundCollision(this, myGame);
         AddChild(groundCollision);
@@ -100,7 +101,6 @@ public class Character : Sprite
 
         max_gravity = self.maxGravity;
         gravity = self.gravity;
- 
         
 
 
@@ -129,9 +129,8 @@ public class Character : Sprite
 
     void Update()
     {
-        if (playerId== 0)
+        if (playerId == 0)
         {
-            Console.WriteLine(visibleSprite.currentFrame);
         }
 
         if(!blockMovement)
@@ -143,6 +142,10 @@ public class Character : Sprite
                 Mirror(inputVector);
                 x += moveVector.x;
             //}
+                if (!grounded && canFall)
+                {
+                    Fall();
+                }
         }
 
         if (attackCooldown.cooldownDone())
@@ -155,10 +158,6 @@ public class Character : Sprite
             Attack(directionVector);
         }
 
-        if (!grounded && canFall)
-        {
-            Fall();
-        }
 
         
 
@@ -390,10 +389,8 @@ public class Character : Sprite
         damage += dmg;
         UpdateUI();
         grounded = false;
-        Console.WriteLine(direction.ToString());
         //moveVector = moveVector.addVectors(moveVector, direction.multiplyVector(direction, damage));
         moveVector = direction.multiplyVector(direction, damage);
-        Console.WriteLine(moveVector.ToString());
         myGame.soundPunch.Play();
     }
 

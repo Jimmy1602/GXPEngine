@@ -1,14 +1,14 @@
 using System;                                   // System contains a lot of default C# libraries 
 using GXPEngine;                                // GXPEngine contains the engine
-using System.Drawing;                           // System.Drawing contains drawing tools such as Color definitions
+//using System.Drawing;                           // System.Drawing contains drawing tools such as Color definitions
 using System.Collections.Generic;
-using GXPEngine.Core;
-using System.Drawing.Text;
-using TiledMapParser;
-using System.Diagnostics.SymbolStore;
+//using GXPEngine.Core;
+//using System.Drawing.Text;
+//using TiledMapParser;
+//using System.Diagnostics.SymbolStore;
 using XmlReader;
-using System.Xml.Serialization;
-using System.Drawing.Imaging;
+//using System.Xml.Serialization;
+//using System.Drawing.Imaging;
 
 public class MyGame : Game {
     private cardreader cardreader = new cardreader();

@@ -33,7 +33,7 @@ public class GroundCollision : Sprite
         int number = 0;
         foreach(Plattform p in myGame.Plattforms)
         {
-            if (HitTest(p) && owner.moveVector.y > 0)
+            if (HitTest(p) && owner.moveVector.y > -1)
             {
                 previouslyOn = true;
                 owner.grounded = true;

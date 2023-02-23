@@ -11,18 +11,15 @@ using XmlReader;
 class GroundPound : Attack
 {
     int speed;
-    byte time;
 
     bool alreadyReachedGround = false;
 
-    VisibleAttackSprite visibleSprite;
 
     public GroundPound(AttackProperties self) : base(self)
     {
         staticAnim = true;
         speed = self.speed;
-        time = (byte)self.time;
-        visibleSprite = new VisibleAttackSprite("ground_effect_sprite_sheet.png", 4, 1, time);
+        visibleSprite = new VisibleAttackSprite("ground_effect_sprite_sheet.png", 4, 1, (byte)time);
         visibleSprite.width *= 4;
         visibleSprite.height *= 4;
         visibleSprite.x -= visibleSprite.width / 2;
@@ -31,7 +28,6 @@ class GroundPound : Attack
         visibleSprite.y -= 100;
 
 
-        AddChild(visibleSprite);
         visibleSprite.SetCycle(0, 1, 255);
     }
 
@@ -42,6 +38,7 @@ class GroundPound : Attack
         y += offset;
         caster.canFall = false;
         caster.blockMovement = true;
+        caster.moveVector.y = 1;
     }
 
     void Update()
@@ -51,12 +48,15 @@ class GroundPound : Attack
 
         if (!alreadyReachedGround)
         {
-            caster.y += speed;
-            y += speed;
 
-            if (caster.y > caster.ground)
+            if (caster.grounded)
             {
                 reachedGround();
+            }
+            else
+            {
+                caster.y += speed;
+                y += speed;
             }
         }
         else if(visible)
@@ -79,14 +79,15 @@ class GroundPound : Attack
 
     void reachedGround()
     {
+        Console.WriteLine("yeee");
+        //caster.moveVector.y = 0;
         alreadyReachedGround = true;
-        caster.y = caster.ground;
         caster.toNextFrame();
 
         
-        visibleSprite.SetCycle(0, 4, time);
+        visibleSprite.SetCycle(0, 4, (byte)time);
 
-        attackTimer.reset();
+        //attackTimer.reset();
     }
 
     protected override void HitPlayer(Character target)

@@ -16,7 +16,7 @@ public class Plattform : Sprite
         visibleSprite = new Sprite(imageFileName);
 
         width = pWidth;
-        height = 50;
+        height = 51;
        
         x = pX;
         y = pY;

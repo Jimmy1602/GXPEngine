@@ -95,6 +95,7 @@ class VisibleSprite : AnimationSprite
             }
         }
 
+
         if (currentFrame == attackHitFrame)
         {
             owner.spawnAttack(false);
@@ -146,11 +147,12 @@ class VisibleSprite : AnimationSprite
     {
         if (currentAnim != "special")
         {
+
             currentAnim = "special";
-            SetCycle(specialStartFrame, 1);
-            targetFrame = specialStartFrame;
+            SetCycle(specialStartFrame);
+            //SetCycle(specialStartFrame);
+            targetFrame = specialStartFrame + specialFrames;
             startFrame = specialStartFrame;
-            
             looped = false;
             animDone = false;
         }

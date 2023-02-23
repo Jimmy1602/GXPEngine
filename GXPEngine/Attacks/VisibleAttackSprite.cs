@@ -20,7 +20,7 @@ public class VisibleAttackSprite : AnimationSprite
     bool isMirrored = false;
     public bool previousMirrored = false;
 
-    public VisibleAttackSprite(String imageFileName, int pCols, int rows, byte pTime) : base (imageFileName, pCols, rows, -1, false, false)
+    public VisibleAttackSprite(string imageFileName, int pCols, int rows, byte pTime) : base (imageFileName, pCols, rows, -1, false, false)
     {
         cols = pCols;
         time = pTime;
