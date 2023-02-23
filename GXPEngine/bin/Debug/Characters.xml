@@ -308,13 +308,13 @@
 		runFrames="2"
 		runFramesDelay="10"
 
-		attackStartFrame="0"
-		attackHitFrame="1"
+		attackStartFrame="2"
+		attackHitFrame="3"
 		attackFrames="2"
 		attackFramesDelay="30"
 
-		specialStartFrame="0"
-		specialHitFrame="1"
+		specialStartFrame="2"
+		specialHitFrame="3"
 		specialFrames="2"
 		specialFramesDelay="255"
 

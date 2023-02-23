@@ -31,6 +31,10 @@ public class MyGame : Game {
     public Sound soundPunch;
     public Sound soundWhoosh;
 
+    public Sound soundKatana;
+    public Sound soundKetchup;
+    public Sound soundBoomerang;
+
     public MyGame() : base(1366, 768, false, false, 600, 400)
 	{
 
@@ -41,6 +45,10 @@ public class MyGame : Game {
         soundCountdown = new Sound("countdown.wav");
         soundPunch = new Sound("punch.wav");
         soundWhoosh = new Sound("whoosh.wav");
+
+        soundKatana = new Sound("katana.wav");
+        soundKetchup = new Sound("ketchup.wav");
+        soundBoomerang = new Sound("boomerang.wav");
 
         StartGame();
     }
@@ -145,7 +153,7 @@ public class MyGame : Game {
                 player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "raspberry_sprite_sheet.png", 4, 3);
                 break;
             case 7: // melon bosss
-                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "melon_sprite_sheet.png", 2, 1);
+                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "melon_sprite_sheet.png", 4, 1);
                 break;
         }
 
