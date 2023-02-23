@@ -112,7 +112,7 @@ public class MyGame : Game {
         switch (id)
         {
             case 0: // apple
-                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "apple_sprite_sheet.png", 11, 1);
+                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "apple_sprite_sheet.png", 7, 2);
                 break;
             case 1: // banana
                 player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Boomerang(attackData.attacks[1]), "banana_sprite_sheet.png", 22, 1);
@@ -121,19 +121,19 @@ public class MyGame : Game {
                 player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "lemon_sprite_sheet.png", 10, 2);
                 break;
             case 3: // tomato
-                player = new Character(characterData, id, this, new Boomerang(attackData.attacks[1]), new Attack(attackData.attacks[0]), "tomato_sprite_sheet.png", 11, 1);
+                player = new Character(characterData, id, this, new Boomerang(attackData.attacks[1]), new Attack(attackData.attacks[0]), "tomato_sprite_sheet.png", 7, 3);
                 break;
             case 4: // orange
                 player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new GroundPound(attackData.attacks[2]), "orange_sprite_sheet.png", 4, 6);
                 break;
             case 5: // strawberry
-                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "strawberry_sprite_sheet.png", 11, 1);
+                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "strawberry_sprite_sheet.png", 7, 2);
                 break;
             case 6: // raspberry
                 player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "raspberry_sprite_sheet.png", 4, 3);
                 break;
             case 7: // melon bosss
-                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "orange_sprite_sheet.png", 6, 6);
+                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "melon_sprite_sheet.png", 2, 1);
                 break;
         }
 

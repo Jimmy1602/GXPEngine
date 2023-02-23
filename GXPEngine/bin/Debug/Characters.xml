@@ -76,7 +76,7 @@
 		specialStartFrame="10"
 		specialHitFrame="18"
 		specialFrames="9"
-		specialFramesDelay="255"
+		specialFramesDelay="10"
 
 		deadFrame="1">
 	</character>
@@ -139,26 +139,26 @@
 		gravity="2.5"
 			   
 		idleStartFrame="0"
-		idleFrames="3"
+		idleFrames="5"
 		idleFrameDelay="50"
 
-		jumpFrame="18"
+		jumpFrame="12"
 
-		runStartFrame="6"
-		runFrames="4"
+		runStartFrame="5"
+		runFrames="6"
 		runFramesDelay="10"
 
-		attackStartFrame="12"
-		attackHitFrame="13"
+		attackStartFrame="10"
+		attackHitFrame="11"
 		attackFrames="2"
 		attackFramesDelay="30"
 
-		specialStartFrame="30"
-		specialHitFrame="30"
+		specialStartFrame="14"
+		specialHitFrame="15"
 		specialFrames="2"
 		specialFramesDelay="255"
 
-		deadFrame="1">
+		deadFrame="13">
 	</character>
 			<character name="Orange" 
 		maxMoveSpeed="10"
@@ -220,25 +220,25 @@
 			   
 		idleStartFrame="0"
 		idleFrames="3"
-		idleFrameDelay="50"
+		idleFrameDelay="20"
 
-		jumpFrame="18"
+		jumpFrame="10"
 
-		runStartFrame="6"
-		runFrames="4"
+		runStartFrame="3"
+		runFrames="5"
 		runFramesDelay="10"
 
-		attackStartFrame="12"
-		attackHitFrame="13"
+		attackStartFrame="8"
+		attackHitFrame="9"
 		attackFrames="2"
 		attackFramesDelay="30"
 
-		specialStartFrame="30"
-		specialHitFrame="30"
-		specialFrames="2"
+		specialStartFrame="12"
+		specialHitFrame="12"
+		specialFrames="1"
 		specialFramesDelay="255"
 
-		deadFrame="1">
+		deadFrame="11">
 	</character>
 	<character name="Raspberry" 
 		maxMoveSpeed="10"
@@ -281,8 +281,8 @@
 		deadFrame="1">
 	</character>
 	<character name="Melon" 
-		maxMoveSpeed="10"
-		moveSpeedUp="3"
+		maxMoveSpeed="20"
+		moveSpeedUp="2"c
 		moveSlowDown="1"
 		groundSlowDown="3"
 			   
@@ -295,26 +295,26 @@
 		jumpHoldHeight="1"
 		jumpBuffer="300"
 			   
-		maxGravity="40"
+		maxGravity="10"
 		gravity="2.5"
 			   
 		idleStartFrame="0"
 		idleFrames="3"
 		idleFrameDelay="50"
 
-		jumpFrame="18"
+		jumpFrame="1"
 
-		runStartFrame="3"
-		runFrames="4"
+		runStartFrame="0"
+		runFrames="2"
 		runFramesDelay="10"
 
-		attackStartFrame="12"
-		attackHitFrame="13"
+		attackStartFrame="0"
+		attackHitFrame="1"
 		attackFrames="2"
 		attackFramesDelay="30"
 
-		specialStartFrame="30"
-		specialHitFrame="30"
+		specialStartFrame="0"
+		specialHitFrame="1"
 		specialFrames="2"
 		specialFramesDelay="255"
 
