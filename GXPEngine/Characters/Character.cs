@@ -67,6 +67,8 @@ public class Character : Sprite
 
     GroundCollision groundCollision;
 
+    public bool isMirrored { get; private set; } = false;
+
     public bool blockMovement { set; private get; } = false;
 
 
@@ -174,10 +176,12 @@ public class Character : Sprite
             if (inputVector.x < 0)
             {
                 visibleSprite.Mirror(true, false);
+                isMirrored = true;
             }
             else
             {
                 visibleSprite.Mirror(false, false);
+                isMirrored = false;
             }
         }
     }

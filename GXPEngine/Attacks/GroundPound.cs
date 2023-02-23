@@ -22,7 +22,7 @@ class GroundPound : Attack
         staticAnim = true;
         speed = self.speed;
         time = (byte)self.time;
-        visibleSprite = new VisibleAttackSprite("ground_effect_sprite_sheet.png", 4, 1);
+        visibleSprite = new VisibleAttackSprite("ground_effect_sprite_sheet.png", 4, 1, time);
         visibleSprite.width *= 4;
         visibleSprite.height *= 4;
         visibleSprite.x -= visibleSprite.width / 2;
