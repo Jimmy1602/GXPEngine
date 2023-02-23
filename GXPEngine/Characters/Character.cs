@@ -134,10 +134,13 @@ public class Character : Sprite
 
         if(!blockMovement)
         {
-            Vector2 inputVector = MoveInputHandeling();
-            Movement(inputVector);
-            Mirror(inputVector);
-            x += moveVector.x;
+            //if (myGame.soundCountdown)
+            //{
+                Vector2 inputVector = MoveInputHandeling();
+                Movement(inputVector);
+                Mirror(inputVector);
+                x += moveVector.x;
+            //}
         }
 
         if (attackCooldown.cooldownDone())
