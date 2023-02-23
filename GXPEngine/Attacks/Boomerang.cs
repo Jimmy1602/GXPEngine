@@ -16,15 +16,24 @@ public class Boomerang : Attack
     private int speed;
     private int backSpeed;
 
-    public Boomerang(AttackProperties self) : base(self)
+    public Boomerang(AttackProperties self) : base(self, "boomerang.png", 1)
     {
+        attackTimer = new Timer(time, true);
+        Console.WriteLine(time);
         speed = self.speed;
         backSpeed = self.backSpeed;
     }
 
     public override void Spawn(int direction, Character Pcaster)
     {
+        if(parent != null)
+        {
+            visibleSprite.width = 1;
+            visibleSprite.height = 1;
+        }
+
         UniversalSpawn(Pcaster);
+        attackTimer.reset();
         moveVector.x = direction * speed + caster.moveVector.x;
     }
 

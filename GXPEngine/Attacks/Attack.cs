@@ -29,9 +29,9 @@ public class Attack : Sprite
     public bool staticAnim = false;
     public bool basic = false;
 
-    VisibleAttackSprite visibleSprite;
+    protected VisibleAttackSprite visibleSprite;
 
-    protected byte time;
+    protected int time;
 
     public Attack(AttackProperties self, String visibleImageFile = "attack_effect_sprite_sheet.png", int visibleSpriteCols = 3, String imageFilename = "CharacterRect.png") : base(imageFilename)
     {
@@ -45,19 +45,22 @@ public class Attack : Sprite
         offset = self.offset;
         baseOffset = offset;
 
+        visibleSprite = new VisibleAttackSprite(visibleImageFile, visibleSpriteCols, 1, (byte)self.time);
         basic = self.special == 0 ? true : false;
         visible = false;
 
-        visibleSprite = new VisibleAttackSprite(visibleImageFile, visibleSpriteCols, 1, (byte)self.time);
-
-        visibleSprite.SetXY((-width / 2) - 120, (-height / 2) - 40);
-        visibleSprite.width *= 5;
-
-        AddChild(visibleSprite);
     }
 
     public virtual void Spawn(int direction, Character Pcaster)
     {
+        if(parent == null)
+        {
+
+            visibleSprite.SetXY((-width / 2) - 120, (-height / 2) - 40);
+            visibleSprite.width *= 5;
+
+        }
+
         offset = direction * baseOffset;
         UniversalSpawn(Pcaster);
 
@@ -65,14 +68,16 @@ public class Attack : Sprite
 
         visibleSprite.doMirror(caster.isMirrored);
 
-
         visibleSprite.setAnim();
+
+        caster.blockMovement = true;
     }
 
     protected void UniversalSpawn(Character Pcaster)
     {
         if (parent == null)
         {
+            AddChild(visibleSprite);
             game.AddChild(this);
         }
         visible = true;
@@ -96,6 +101,7 @@ public class Attack : Sprite
         
         if (visibleSprite.animDone)//attackTimer.cooldownDone())
         {
+            caster.blockMovement = false;
             Die();
         }
         
