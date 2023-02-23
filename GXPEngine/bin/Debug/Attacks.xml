@@ -14,7 +14,7 @@
 		cooldown="1000"
 	    damage="1"
 		xKnockback="0.15"
-		yKnockback="0.15"
+		yKnockback="1"
 		iMillis="300"
 		speed="20"
 		backSpeed="40"

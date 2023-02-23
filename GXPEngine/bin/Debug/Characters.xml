@@ -76,7 +76,7 @@
 		specialStartFrame="10"
 		specialHitFrame="18"
 		specialFrames="9"
-		specialFramesDelay="10"
+		specialFramesDelay="2"
 
 		deadFrame="1">
 	</character>

@@ -131,7 +131,7 @@ public class Character : Sprite
     {
         if (playerId== 0)
         {
-
+            Console.WriteLine(visibleSprite.currentFrame);
         }
 
         if(!blockMovement)
@@ -390,7 +390,10 @@ public class Character : Sprite
         damage += dmg;
         UpdateUI();
         grounded = false;
-        moveVector = moveVector.addVectors(moveVector, direction.multiplyVector(direction, damage));
+        Console.WriteLine(direction.ToString());
+        //moveVector = moveVector.addVectors(moveVector, direction.multiplyVector(direction, damage));
+        moveVector = direction.multiplyVector(direction, damage);
+        Console.WriteLine(moveVector.ToString());
         myGame.soundPunch.Play();
     }
 

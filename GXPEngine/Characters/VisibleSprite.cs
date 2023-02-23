@@ -142,7 +142,7 @@ class VisibleSprite : AnimationSprite
             animDone = false;
         }
     }
-    public void SetSpecialAnim()
+    public void SetStaticSpecialAnim()
     {
         if (currentAnim != "special")
         {
@@ -156,7 +156,7 @@ class VisibleSprite : AnimationSprite
         }
     }
 
-    public void SetStaticSpecialAnim()
+    public void SetSpecialAnim()
     {
         if (currentAnim != "special")
         {

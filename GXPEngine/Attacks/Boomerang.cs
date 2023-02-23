@@ -18,18 +18,20 @@ public class Boomerang : Attack
 
     public Boomerang(AttackProperties self) : base(self, "boomerang.png", 1)
     {
-        attackTimer = new Timer(time, true);
-        Console.WriteLine(time);
+        attackTimer = new Timer(self.time, true);
+        Console.WriteLine(self.time);
         speed = self.speed;
         backSpeed = self.backSpeed;
     }
 
     public override void Spawn(int direction, Character Pcaster)
     {
-        if(parent != null)
+        if(parent == null)
         {
-            visibleSprite.width = 1;
-            visibleSprite.height = 1;
+            visibleSprite.width = 100;
+            visibleSprite.height = 100;
+            visibleSprite.x -= width / 2;
+            visibleSprite.y -= height / 2;
         }
 
         UniversalSpawn(Pcaster);
@@ -41,6 +43,10 @@ public class Boomerang : Attack
     {
         if (!visible)
             return;
+
+        rotation += Time.deltaTime;
+
+       // Console.WriteLine(visibleSprite.width);
 
         position = new Vector2(x, y);
         if (attackTimer.cooldownDone())
@@ -72,7 +78,7 @@ public class Boomerang : Attack
 
     protected override void HitPlayer(Character target)
     {
-        target.getHit(DesignerChanges.boomerangDamage, new Vector2(moveVector.x * DesignerChanges.boomerangKnockbackX, moveVector.y * DesignerChanges.boomerangKnockbackY));
+        target.getHit(damage, new Vector2(moveVector.x * xKnockback, moveVector.y == 0 ? 1 : moveVector.y * -yKnockback));
     }
 
     protected override void Die()
