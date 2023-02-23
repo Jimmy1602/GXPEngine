@@ -36,7 +36,7 @@ public class RoomController
     }
     public void CreateRandomRoom()
     {
-        CreateRoom(1);
+        CreateRoom(0);
     }
 
 }

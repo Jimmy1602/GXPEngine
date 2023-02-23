@@ -204,6 +204,7 @@ public class Character : Sprite
 
         if (!attack.visible)
         {
+            myGame.soundWhoosh.Play();
             attack.Spawn(visibleSprite.isMirrored() ? -1 : 1, this);
         }
     }
@@ -383,6 +384,7 @@ public class Character : Sprite
         UpdateUI();
         grounded = false;
         moveVector = moveVector.addVectors(moveVector, direction.multiplyVector(direction, damage));
+        myGame.soundPunch.Play();
     }
 
     private void SetupUI()
@@ -407,6 +409,7 @@ public class Character : Sprite
     {
         if(x < -maxOutside || x > game.width + maxOutside || y < -maxOutside || y > game.height + maxOutside)
         {
+            myGame.soundDeath.Play();
             myGame.ResetGame();
         }
     }

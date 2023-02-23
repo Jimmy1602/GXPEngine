@@ -25,12 +25,23 @@ public class MyGame : Game {
 
     public List<Plattform> Plattforms = new List<Plattform>();
 
+    public Sound soundSelectCard;
+    public Sound soundDeath;
+    public Sound soundCountdown;
+    public Sound soundPunch;
+    public Sound soundWhoosh;
+
     public MyGame() : base(1366, 768, false, false, 600, 400)
 	{
 
         characterData = xmlReader.ReadCharacterMap("Characters.xml");
         attackData = xmlReader.ReadAttackMap("Attacks.xml");
-        
+        soundSelectCard = new Sound("select_card.wav");
+        soundDeath = new Sound("death.wav");
+        soundCountdown = new Sound("countdown.wav");
+        soundPunch = new Sound("punch.wav");
+        soundWhoosh = new Sound("whoosh.wav");
+
         StartGame();
     }
 
@@ -93,16 +104,17 @@ public class MyGame : Game {
 
         if (playerOne == null)
         {
+            soundSelectCard.Play();
             playerOne = LoadCharacters(id, playerOne);
             Console.WriteLine("Player One selected: " + id.ToString());
 
         }
         else if (playerTwo == null)
         {
-            
+            soundSelectCard.Play();
             playerTwo = LoadCharacters(id, playerTwo);
             Console.WriteLine("Player Two selected: " + id.ToString());
-
+            soundCountdown.Play();
         }
     }
 
