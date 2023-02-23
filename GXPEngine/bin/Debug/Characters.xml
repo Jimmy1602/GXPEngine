@@ -282,7 +282,7 @@
 	</character>
 	<character name="Melon" 
 		maxMoveSpeed="20"
-		moveSpeedUp="2"c
+		moveSpeedUp="2"
 		moveSlowDown="1"
 		groundSlowDown="3"
 			   
