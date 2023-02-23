@@ -150,7 +150,7 @@ public class MyGame : Game {
                 player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "strawberry_sprite_sheet.png", 7, 2);
                 break;
             case 6: // raspberry
-                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "raspberry_sprite_sheet.png", 4, 3);
+                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new GroundPound(attackData.attacks[2]), "raspberry_sprite_sheet.png", 4, 3);
                 break;
             case 7: // melon bosss
                 player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "melon_sprite_sheet.png", 4, 1);

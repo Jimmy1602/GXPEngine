@@ -410,7 +410,7 @@ public class Character : Sprite
 
     private void Die()
     {
-        if(x < -maxOutside || x > game.width + maxOutside || y < -maxOutside || y > game.height + maxOutside)
+        if(x < -maxOutside || x > game.width + maxOutside ||  y > game.height + maxOutside)
         {
             myGame.soundDeath.Play();
             myGame.ResetGame();

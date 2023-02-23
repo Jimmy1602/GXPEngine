@@ -121,16 +121,16 @@
 		deadFrame="16">
 	</character>
 	<character name="Tomato" 
-		maxMoveSpeed="10"
+		maxMoveSpeed="9"
 		moveSpeedUp="3"
 		moveSlowDown="1"
 		groundSlowDown="3"
 			   
 		dashCheckTime="250"
 		dashTime="100"
-		dashSpeed="25"
+		dashSpeed="20"
 			   
-		jumpHeight="30"
+		jumpHeight="40"
 		jumpHoldTime="150"
 		jumpHoldHeight="1"
 		jumpBuffer="300"
@@ -241,14 +241,14 @@
 		deadFrame="11">
 	</character>
 	<character name="Raspberry" 
-		maxMoveSpeed="10"
-		moveSpeedUp="3"
+		maxMoveSpeed="11"
+		moveSpeedUp="5"
 		moveSlowDown="1"
-		groundSlowDown="3"
+		groundSlowDown="5"
 			   
 		dashCheckTime="250"
 		dashTime="100"
-		dashSpeed="25"
+		dashSpeed="30"
 			   
 		jumpHeight="30"
 		jumpHoldTime="150"
@@ -271,12 +271,12 @@
 		attackStartFrame="8"
 		attackHitFrame="9"
 		attackFrames="2"
-		attackFramesDelay="30"
+		attackFramesDelay="10"
 
 		specialStartFrame="10"
 		specialHitFrame="11"
 		specialFrames="2"
-		specialFramesDelay="255"
+		specialFramesDelay="10"
 
 		deadFrame="1">
 	</character>
