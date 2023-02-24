@@ -33,7 +33,7 @@ public class Attack : Sprite
 
     protected int time;
 
-    public Attack(AttackProperties self, String visibleImageFile = "attack_effect_sprite_sheet.png", int visibleSpriteCols = 3, String imageFilename = "BlackSquare.png") : base(imageFilename)
+    public Attack(AttackProperties self, String visibleImageFile = "attack_effect_sprite_sheet.png", int visibleSpriteCols = 3, String imageFilename = "CharacterRect.png") : base(imageFilename)
     {
         //time = (byte)self.time;
         //attackTimer = new Timer(self.time);

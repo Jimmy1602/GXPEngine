@@ -33,10 +33,10 @@
 		attackFrames="2"
 		attackFramesDelay="30"
 
-		specialStartFrame="30"
-		specialHitFrame="30"
+		specialStartFrame="8"
+		specialHitFrame="9"
 		specialFrames="2"
-		specialFramesDelay="255"
+		specialFramesDelay="30"
 
 		deadFrame="11">
 	</character>

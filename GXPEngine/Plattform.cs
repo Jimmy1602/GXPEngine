@@ -11,7 +11,7 @@ public class Plattform : Sprite
 {
 
     Sprite visibleSprite;
-    public Plattform(String imageFileName, int pX, int pY, int pWidth = 1000) : base("BlackSquare.png")//"CharacterRect.png")
+    public Plattform(String imageFileName, int pX, int pY, int pWidth = 1000) : base("CharacterRect.png")//"CharacterRect.png")
     {
         visibleSprite = new Sprite(imageFileName);
 
