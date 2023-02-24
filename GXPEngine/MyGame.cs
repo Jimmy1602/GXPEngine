@@ -36,7 +36,7 @@ public class MyGame : Game {
     public Sound soundKetchup;
     public Sound soundBoomerang;
 
-    public MyGame() : base(1366, 768, false, false, 600, 400)
+    public MyGame() : base(1366, 768, true, false)
 	{
 
         characterData = xmlReader.ReadCharacterMap("Characters.xml");
@@ -67,7 +67,9 @@ public class MyGame : Game {
 
         isCharacterSelect = true;
         Backgroundp1 = new Sprite("bkplayer1.png"); Backgroundp1.SetXY(width / 2, height / 2);
+        Backgroundp1.width = width; Backgroundp1.height = height;
         Backgroundp2 = new Sprite("bkplayer2.png"); Backgroundp2.SetXY(width / 2, height / 2);
+        Backgroundp2.width = width; Backgroundp2.height = height;
         AddChild(Backgroundp2); AddChild(Backgroundp1);
 
     }
