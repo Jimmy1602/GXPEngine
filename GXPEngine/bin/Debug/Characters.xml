@@ -299,22 +299,22 @@
 		gravity="2.5"
 			   
 		idleStartFrame="0"
-		idleFrames="3"
+		idleFrames="1"
 		idleFrameDelay="50"
 
-		jumpFrame="1"
+		jumpFrame="0"
 
 		runStartFrame="0"
-		runFrames="2"
+		runFrames="1"
 		runFramesDelay="10"
 
-		attackStartFrame="2"
-		attackHitFrame="3"
+		attackStartFrame="0"
+		attackHitFrame="1"
 		attackFrames="2"
 		attackFramesDelay="30"
 
 		specialStartFrame="2"
-		specialHitFrame="3"
+		specialHitFrame="2"
 		specialFrames="2"
 		specialFramesDelay="255"
 
