@@ -223,6 +223,7 @@ public class MyGame : Game {
         playerOne = null;
         playerTwo = null;
 
+        Plattforms.Clear();
         StartGame();
     }
 

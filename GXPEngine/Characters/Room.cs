@@ -12,6 +12,7 @@ using XmlReader;
 
 public class RoomController
 {
+    Random random = new Random();
     MyGame gameLeader;
     public RoomController(MyGame pMyGame)
     {
@@ -24,19 +25,27 @@ public class RoomController
         {
             case 0:
                 newroom = new Room(this.gameLeader, "Background.png", "Plattform.png");
-                newroom.addPlatform("Plattform.png", 400, 400, 600);
+                newroom.addPlatform("Plattform.png", 280, 400, 350);
+                newroom.addPlatform("Plattform.png", gameLeader.width-280, 400, 350);
                 break;
             case 1:
                 newroom = new Room(this.gameLeader, "background2.png", "Platform2.png");
+                newroom.addPlatform("Platform2.png", gameLeader.width/2, 350, 450);
                 break;
             case 2:
                 newroom = new Room(this.gameLeader, "background3.png", "Platform3.png");
+                break;
+            case 3:
+                newroom = new Room(this.gameLeader, "Background.png", "Plattform.png");
+                newroom.addPlatform("Plattform.png", 280, 400, 350);
+                newroom.addPlatform("Plattform.png", gameLeader.width - 280, 400, 350);
                 break;
         }
     }
     public void CreateRandomRoom()
     {
-        CreateRoom(0);
+        //CreateRoom(1);
+        CreateRoom(random.Next(0, 3));
     }
 
 }
