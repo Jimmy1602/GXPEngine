@@ -75,7 +75,6 @@ public class Character : Sprite
     public Character(CharacterSheet characterdata, int characterId, MyGame pMyGame, Attack pBasicAttack, Attack pSpecialAttack, string imageFileName, int columns, int rows) : base("CharacterRect.png", false, true, false)
     {
 
-
         myGame = pMyGame;
         groundCollision = new GroundCollision(this, myGame);
         AddChild(groundCollision);
@@ -110,6 +109,8 @@ public class Character : Sprite
         y = 400;
     }
 
+    public Pointer pointer;
+
     public void Spawn(int pPlayerId, Character pOther)
     {
         playerId = pPlayerId;
@@ -119,7 +120,7 @@ public class Character : Sprite
         other = pOther;
 
         string playerheaderfile = "player1.png"; if (pPlayerId == 1) { playerheaderfile = "player2.png"; }
-        new Pointer(playerheaderfile,this);
+        pointer = new Pointer(playerheaderfile,this);
 
         //header.SetXY(this.x,this.y);
 
@@ -129,6 +130,9 @@ public class Character : Sprite
 
     void Update()
     {
+        if (myGame.isEndScreen)
+            return;
+
         if (playerId == 0)
         {
         }
@@ -400,8 +404,8 @@ public class Character : Sprite
         damageDisplay.SetXY(playerId == 0 ? 0 : game.width - damageDisplay.width, 0);
 
         damageDisplay.TextAlign(CenterMode.Center, CenterMode.Center);
-        damageDisplay.Fill(255);
-        damageDisplay.TextSize(50);
+        damageDisplay.Fill(0);
+        damageDisplay.TextSize(70);
         damageDisplay.Text(damage.ToString());
         game.AddChild(damageDisplay);
     }
@@ -417,7 +421,7 @@ public class Character : Sprite
         if(x < -maxOutside || x > game.width + maxOutside ||  y > game.height + maxOutside)
         {
             myGame.soundDeath.Play();
-            myGame.ResetGame();
+            myGame.EndScreen(this);
         }
     }
 

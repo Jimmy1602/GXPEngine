@@ -80,7 +80,7 @@
 
 		deadFrame="1">
 	</character>
-		<character name="Lemon" 
+	<character name="Lemon" 
 		maxMoveSpeed="10"
 		moveSpeedUp="3"
 		moveSlowDown="1"
@@ -108,15 +108,15 @@
 		runFrames="6"
 		runFramesDelay="10"
 
-		attackStartFrame="17"
-		attackHitFrame="19"
-		attackFrames="3"
+		attackStartFrame="10"
+		attackHitFrame="14"
+		attackFrames="5"
 		attackFramesDelay="5"
 
-		specialStartFrame="10"
-		specialHitFrame="15"
-		specialFrames="5"
-		specialFramesDelay="10"
+		specialStartFrame="17"
+		specialHitFrame="18"
+		specialFrames="3"
+		specialFramesDelay="12"
 
 		deadFrame="16">
 	</character>
@@ -160,7 +160,7 @@
 
 		deadFrame="13">
 	</character>
-		<character name="Orange" 
+	<character name="Orange" 
 		maxMoveSpeed="10"
 		moveSpeedUp="3"
 		moveSlowDown="1"
@@ -274,7 +274,7 @@
 		attackFramesDelay="10"
 
 		specialStartFrame="10"
-		specialHitFrame="11"
+		specialHitFrame="10"
 		specialFrames="2"
 		specialFramesDelay="10"
 

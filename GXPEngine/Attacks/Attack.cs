@@ -19,7 +19,7 @@ public class Attack : Sprite
     protected float yKnockback;
 
     public int offset;
-    private int baseOffset;
+    protected int baseOffset;
 
     Timer iFrames;
     protected bool canHit = true;
@@ -33,7 +33,7 @@ public class Attack : Sprite
 
     protected int time;
 
-    public Attack(AttackProperties self, String visibleImageFile = "attack_effect_sprite_sheet.png", int visibleSpriteCols = 3, String imageFilename = "CharacterRect.png") : base(imageFilename)
+    public Attack(AttackProperties self, String visibleImageFile = "attack_effect_sprite_sheet.png", int visibleSpriteCols = 3, String imageFilename = "BlackSquare.png") : base(imageFilename)
     {
         //time = (byte)self.time;
         //attackTimer = new Timer(self.time);
@@ -86,9 +86,11 @@ public class Attack : Sprite
         caster.canAttack = false;
 
 
-
-        x = getCasterPosition().x;
-        y = getCasterPosition().y;
+        if(caster != parent)
+        {
+            x = getCasterPosition().x;
+            y = getCasterPosition().y;
+        }
     }
 
     void Update()
@@ -98,7 +100,6 @@ public class Attack : Sprite
 
         visibleSprite.Animate();
 
-        
         if (visibleSprite.animDone)//attackTimer.cooldownDone())
         {
             caster.blockMovement = false;
@@ -118,6 +119,7 @@ public class Attack : Sprite
 
         if (HitTest(caster.other) && canHit && caster.other.dashTimer.cooldownDone())
         {
+            Console.WriteLine("well thats good");
             iFrames.reset();
             canHit = false;
             HitPlayer(caster.other);
@@ -131,7 +133,7 @@ public class Attack : Sprite
 
     protected virtual void HitPlayer(Character target)
     {
-        target.getHit(damage, new Vector2(offset/100 * xKnockback, -yKnockback));
+        target.getHit(damage, new Vector2(offset/baseOffset * xKnockback, -yKnockback));
         
     }
 

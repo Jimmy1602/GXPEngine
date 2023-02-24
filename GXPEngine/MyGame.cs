@@ -13,6 +13,7 @@ using XmlReader;
 public class MyGame : Game {
     private cardreader cardreader = new cardreader();
     public bool isCharacterSelect = true;
+    public bool isEndScreen = false;
 
     private Character playerOne = null;
     private Character playerTwo = null;
@@ -73,7 +74,11 @@ public class MyGame : Game {
 
     void Update()
     {
-        if (isCharacterSelect)
+        if (isEndScreen)
+        {
+            EndScreenUpdate();
+        }
+        else if (isCharacterSelect)
         {
             characterSelect();
         }
@@ -126,6 +131,54 @@ public class MyGame : Game {
         }
     }
 
+    AnimationSprite blender;
+    Character loser;
+    EasyDraw endScreenText;
+    Timer endScreenTimer;
+
+    public void EndScreen(Character loser)
+    {
+        isEndScreen= true;
+        
+        
+        blender = new AnimationSprite("Blender.png", 2, 1, -1, false, false);
+        blender.SetOrigin(blender.width/2, blender.height/2);
+        blender.width /= 2; blender.height /= 2;
+        blender.x = width / 2;
+        blender.y = height / 2 - 50;
+        blender.SetCycle(0, 2, 5);
+
+        endScreenText = new EasyDraw(1200, 150, false);
+        endScreenText.SetOrigin(endScreenText.width/2, endScreenText.height/2);
+        endScreenText.SetXY(width/2, endScreenText.height /2);
+
+        endScreenText.TextAlign(CenterMode.Center, CenterMode.Center);
+        endScreenText.Fill(255);
+        endScreenText.TextSize(100);
+        endScreenText.Text(loser.playerId != 0 ? "Player One Won!!" : "Player Two Won!!");
+
+        this.loser = loser;
+        this.loser.blockMovement = true;
+        this.loser.x = width/2 - 0; //this.loser.y = (height / 2) + 30;
+        this.loser.pointer.LateDestroy();
+
+        AddChild(blender);
+        game.AddChild(endScreenText);
+
+        endScreenTimer = new Timer(1000);
+    }
+
+    void EndScreenUpdate()
+    {
+        loser.Turn(Time.deltaTime);
+        loser.y = (height / 2) + 50;
+        blender.Animate();
+
+        if (endScreenTimer.cooldownDone() && (Input.GetKeyDown(Key.V) || Input.GetKeyDown(Key.P)))
+        {
+            ResetGame();
+        }
+    }
 
     Character LoadCharacters(int id, Character player)
     {
@@ -138,10 +191,10 @@ public class MyGame : Game {
                 player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Boomerang(attackData.attacks[1]), "banana_sprite_sheet.png", 22, 1);
                 break;
             case 2: // lemon
-                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Attack(attackData.attacks[0]), "lemon_sprite_sheet.png", 10, 2);
+                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Dash(attackData.attacks[3]), "lemon_sprite_sheet.png", 10, 2);
                 break;
             case 3: // tomato
-                player = new Character(characterData, id, this, new Boomerang(attackData.attacks[1]), new Attack(attackData.attacks[0]), "tomato_sprite_sheet.png", 7, 3);
+                player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new Boomerang(attackData.attacks[1]), "tomato_sprite_sheet.png", 7, 3);
                 break;
             case 4: // orange
                 player = new Character(characterData, id, this, new Attack(attackData.attacks[0]), new GroundPound(attackData.attacks[2]), "orange_sprite_sheet.png", 4, 6);
@@ -164,6 +217,7 @@ public class MyGame : Game {
 
     public void ResetGame()
     {
+        isEndScreen= false;
         DestroyAll();
 
         playerOne = null;

@@ -45,7 +45,7 @@ public class Boomerang : Attack
 
         rotation += Time.deltaTime;
 
-       // Console.WriteLine(visibleSprite.width);
+        //Console.WriteLine(visibleSprite.width);
 
         position = new Vector2(x, y);
         if (attackTimer.cooldownDone())

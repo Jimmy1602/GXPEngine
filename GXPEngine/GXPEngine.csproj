@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attacks\Dash.cs" />
     <Compile Include="Attacks\Slice.cs" />
     <Compile Include="Attacks\Attack.cs" />
     <Compile Include="Attacks\Boomerang.cs" />

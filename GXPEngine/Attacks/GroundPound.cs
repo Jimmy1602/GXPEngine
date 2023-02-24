@@ -26,6 +26,7 @@ class GroundPound : Attack
         visibleSprite.y -= visibleSprite.height / 2;
         visibleSprite.x += 10;
         visibleSprite.y -= 100;
+        time = self.time;
 
 
         visibleSprite.SetCycle(0, 1, 255);
@@ -79,11 +80,10 @@ class GroundPound : Attack
 
     void reachedGround()
     {
-        Console.WriteLine("yeee");
         //caster.moveVector.y = 0;
         alreadyReachedGround = true;
         caster.toNextFrame();
-
+        Console.WriteLine(time);
         
         visibleSprite.SetCycle(0, 4, (byte)time);
 

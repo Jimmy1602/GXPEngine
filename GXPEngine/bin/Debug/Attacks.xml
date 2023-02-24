@@ -28,6 +28,16 @@
 		yKnockback="1.5"
 		iMillis="300"
 		offset="30"
-		speed="50"
+		speed="40"
+		special="1"/>
+	<attack name="Dash"
+		time="300"
+		cooldown="1000"
+	    damage="2"
+		xKnockback="3"
+		yKnockback="1"
+		iMillis="300"
+		offset="50"
+		speed="30"
 		special="1"/>
 </attackList>
